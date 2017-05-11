@@ -13,25 +13,19 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="listing-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Listing'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'listing_id',
-            'parse_id',
             'item_id',
             'time_created',
             'price',
-            // 'content',
+            'm2',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            'template'=>'{view}'],
         ],
     ]); ?>
 </div>

@@ -76,13 +76,18 @@ class Item extends \yii\db\ActiveRecord
     /**
      * @return array
      */
-    public function getChartData(){
+    public function getChartPriceData($perM2 = false){
         $data = $this->itemStats;
         $out = [];
         if(!empty($data)){
-            foreach ($data as $item) {
-                $date = new \DateTime($item['period']);
-                $out[] =[($date->format('U') * 1000),(integer) $item['price']];
+            foreach ($data as $row) {
+                $date = new \DateTime($row['period']);
+                if($perM2){
+                    $price = $row['price'] / $this->m2;
+                }else{
+                    $price = $row['price'];
+                }
+                $out[] =[($date->format('U') * 1000),(integer) $price];
             }
         }
         return $out;

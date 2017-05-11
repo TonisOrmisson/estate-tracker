@@ -32,13 +32,19 @@ echo Highcharts::widget([
             ]
         ],
         'yAxis' => [
-            'title' => ['text' => Yii::t('app','Item price')]
+            ['title' => ['text' => Yii::t('app','Item price')],'min'=>0],
+            ['title' => ['text' => Yii::t('app','m2 price')],'min'=>0,'opposite'=>true]
         ],
         'series' => [
             [
                 'name' => Yii::t('app','Price'),
-                'data' => $model->getChartData(),
-                'colorIndex'=>7,
+                'data' => $model->getChartPriceData(),
+                'yAxis'=>0,
+            ],
+            [
+                'name' => Yii::t('app','Price/m2'),
+                'data' => $model->getChartPriceData(true),
+                'yAxis'=>1,
             ],
        ]
     ]

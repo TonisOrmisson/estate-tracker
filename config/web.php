@@ -6,7 +6,10 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'timezone' => 'Europe/Tallinn',
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'app\bootstraps\AppBootstrap',
+        ],
     'defaultRoute' => 'item',
     'components' => [
         'request' => [

@@ -8,7 +8,7 @@ use app\models\UserHasItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * UserHasItemController implements the CRUD actions for UserHasItem model.
  */
@@ -24,6 +24,15 @@ class UserHasItemController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
+                    ],
                 ],
             ],
         ];

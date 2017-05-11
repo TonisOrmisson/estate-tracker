@@ -2,5 +2,6 @@
 
 return [
     'timeZone' => 'Europe/Tallinn',
-    'adminEmail' => 'admin@example.com',
+    'adminEmail' => 'tonis@andmemasin.eu',
+    'siteName' => 'Estate-tracker',
 ];

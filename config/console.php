@@ -1,7 +1,7 @@
 <?php
 
 $params = require(__DIR__ . '/params.php');
-$db = require(__DIR__ . '/db.php');
+$credentials = require(__DIR__ . '/credentials.php');
 
 $config = [
     'id' => 'basic-console',
@@ -15,15 +15,9 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'log' => [
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
-        'db' => $db,
+        'log' => $credentials['log'],
+        'db' => $credentials['db'],
+        'mailer' => $credentials['mailer'],
     ],
     'params' => $params,
     /*

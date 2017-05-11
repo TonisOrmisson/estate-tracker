@@ -34,3 +34,4 @@ Vagrantfile
 
 # actual config
 config/db.php
+config/credentials.php

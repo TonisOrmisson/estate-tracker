@@ -50,7 +50,8 @@ $config = [
             'enableUnconfirmedLogin' => true,
             'confirmWithin' => 21600,
             'cost' => 12,
-            'admins' => ['admin','tonis']
+            'admins' => ['admin','tonis'],
+            'enableRegistration' => false,
         ],
     ],
     'params' => $params,

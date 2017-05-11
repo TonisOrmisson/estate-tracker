@@ -35,7 +35,6 @@ AppAsset::register($this);
     ]);
     $guestItems = [
         ['label' => 'Sign in', 'url' => ['/user/security/login']],
-        ['label' => 'Register', 'url' => ['/user/registration/register']],
 
     ];
     $userItems = [];

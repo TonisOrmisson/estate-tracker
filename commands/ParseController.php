@@ -29,9 +29,19 @@ class ParseController extends Controller
 
             }
 
-            $item = $provider->firstUpdatedItem;
-            $this->stdout($item->key." \n", Console::FG_BLUE);
-            $parse->parse($item);
+            $items = $provider->getParsableItems();
+            $i=0;
+            if($items){
+                foreach ($items as $item){
+                    $this->stdout($item->key." \n", Console::FG_BLUE);
+                    $parse->parse($item);
+                    $i++;
+                }
+            }
+            $parse->time_end = DateHelper::getDatetime6();
+            $parse->items_parsed = $i;
+            $parse->save();
+
 
         }
     }

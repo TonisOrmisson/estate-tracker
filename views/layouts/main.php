@@ -38,6 +38,8 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Providers', 'url' => ['/provider']],
             ['label' => 'Items', 'url' => ['/item']],
+            ['label' => 'Listings', 'url' => ['/listing']],
+            ['label' => 'Parses', 'url' => ['/parse']],
             Yii::$app->user->isGuest ? '': ['label' => 'User management', 'url' => ['/user/admin']],
             Yii::$app->user->isGuest ?
                 ['label' => 'Sign in', 'url' => ['/user/security/login']] :

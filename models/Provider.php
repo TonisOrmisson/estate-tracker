@@ -59,6 +59,14 @@ class Provider extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param integer $count
+     * @return Item[]
+     */
+    public function getParsableItems($count=1){
+        return [$this->firstUpdatedItem];
+    }
+
+    /**
      * Gte the item from that provider that was updated first (most time passed)
      * @return Item
      */

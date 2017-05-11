@@ -25,6 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    <?= $this->render('_chart', [
+        'model' => $model,
+    ]) ?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -32,11 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'item_id',
             'provider_id',
             'key',
+            'm2',
             'time_created',
         ],
-    ]) ?>
-    <?= $this->render('_chart', [
-        'model' => $model,
     ]) ?>
 
 </div>

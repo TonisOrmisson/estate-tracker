@@ -13,6 +13,7 @@ use yii\db\Expression;
  * @property integer $item_id
  * @property string $time_created
  * @property double $price
+ * @property double $m2
  * @property string $content
  *
  * @property Item $item
@@ -37,7 +38,7 @@ class Listing extends \yii\db\ActiveRecord
             [['parse_id', 'item_id', 'time_created'], 'required'],
             [['parse_id', 'item_id'], 'integer'],
             [['time_created'], 'safe'],
-            [['price'], 'number'],
+            [['price','m2'], 'number'],
             [['content'], 'string','max'=>10*1024],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'item_id']],
             [['parse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Parse::className(), 'targetAttribute' => ['parse_id' => 'parse_id']],
@@ -55,6 +56,7 @@ class Listing extends \yii\db\ActiveRecord
             'item_id' => Yii::t('app', 'Item ID'),
             'time_created' => Yii::t('app', 'Time created'),
             'price' => Yii::t('app', 'Item Price'),
+            'm2' => Yii::t('app', 'Item floor area in m2'),
             'content' => Yii::t('app', 'Item listing content text'),
         ];
     }

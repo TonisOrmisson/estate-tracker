@@ -93,6 +93,9 @@ class Provider extends \yii\db\ActiveRecord
             'priceClass'=>[
                 'label' => Yii::t('app','Price element class name'),
             ],
+            'm2Id'=>[
+                'label' => Yii::t('app','Id containing m2 as value'),
+            ],
         ];
     }
     /**

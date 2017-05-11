@@ -77,15 +77,25 @@ class Parse extends \yii\db\ActiveRecord
         $patterns[0] = '/eur/';
         $price = intval(trim(preg_replace('/\s+/', '', $price)));
 
+        $m2Node = $doc->getElementById($locatorData['m2Id']);
+        $m2 = doubleval(trim($m2Node->getAttribute('value')));
+
         $listing = new Listing();
         $listing->parse_id = $this->primaryKey;
         $listing->item_id = $item->primaryKey;
         $listing->time_created = DateHelper::getDatetime6();
         $listing->content = $content;
         $listing->price = $price;
+        $listing->m2 = $m2;
+
         if(!$listing->save()){
             Yii::error("Error saving listing",__METHOD__);
             var_dump($listing->errors);
+        }
+        if($listing->m2 <> $item->m2){
+            $item->m2= $listing->m2;
+            $item->save();
+
         }
 
     }

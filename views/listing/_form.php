@@ -15,6 +15,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'parse_id')->textInput() ?>
 
     <?= $form->field($model, 'item_id')->textInput() ?>
+    <?= $form->field($model, 'm2')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'time_created')->textInput() ?>
 

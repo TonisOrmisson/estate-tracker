@@ -20,6 +20,7 @@ use yii\db\Expression;
  * @property UserHasItem[] $userHasItems
  * @property string $url
  * @property array $itemStats
+ * @property double $m2
  */
 class Item extends \yii\db\ActiveRecord
 {
@@ -40,6 +41,7 @@ class Item extends \yii\db\ActiveRecord
             [['provider_id', 'key', 'time_created'], 'required'],
             [['provider_id'], 'integer'],
             [['time_created'], 'safe'],
+            [['m2'], 'number'],
             [['key'], 'string', 'max' => 255],
             [['provider_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provider::className(), 'targetAttribute' => ['provider_id' => 'provider_id']],
         ];
@@ -54,6 +56,7 @@ class Item extends \yii\db\ActiveRecord
             'item_id' => Yii::t('app', 'Item ID'),
             'provider_id' => Yii::t('app', 'Provider ID'),
             'key' => Yii::t('app', 'The item key/id in the provider to identify the item'),
+            'm2' => Yii::t('app', 'Item floor area in m2'),
             'time_created' => Yii::t('app', 'Time created'),
         ];
     }

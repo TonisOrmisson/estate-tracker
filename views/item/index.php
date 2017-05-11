@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ItemSearch */
@@ -28,6 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'provider_id',
             'key',
             'time_created',
+            [
+                'format'=>'raw',
+                'header'=>Yii::t('app','Source'),
+                'value'=>function($model){
+                    /** @var \app\models\Item $model  */
+                    return Html::a(Yii::t('app','Source'), Url::to($model->url),[
+                            'target'=>'_blank',
+                            'class'=>'btn btn-success'
+                    ]);
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

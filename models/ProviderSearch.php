@@ -62,6 +62,7 @@ class ProviderSearch extends Provider
             'provider_id' => $this->provider_id,
             'active' => $this->active,
         ]);
+        $query->orderBy(['provider_id'=>SORT_DESC]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'url', $this->url])

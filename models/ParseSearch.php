@@ -65,6 +65,7 @@ class ParseSearch extends Parse
             'time_end' => $this->time_end,
             'items_parsed' => $this->items_parsed,
         ]);
+        $query->orderBy(['parse_id'=>SORT_DESC]);
 
         return $dataProvider;
     }

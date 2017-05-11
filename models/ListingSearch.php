@@ -68,6 +68,7 @@ class ListingSearch extends Listing
             'price' => $this->price,
             'content' => $this->content,
         ]);
+        $query->orderBy(['listing_id'=>SORT_DESC]);
 
         return $dataProvider;
     }

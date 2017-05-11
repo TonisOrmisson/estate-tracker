@@ -63,6 +63,7 @@ class ItemSearch extends Item
             'provider_id' => $this->provider_id,
             'time_created' => $this->time_created,
         ]);
+        $query->orderBy(['item_id'=>SORT_DESC]);
 
         $query->andFilterWhere(['like', 'key', $this->key]);
 

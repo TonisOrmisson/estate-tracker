@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use andmemasin\jsonform\JsonForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Provider */
@@ -18,7 +19,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'active')->textInput() ?>
 
-    <?= $form->field($model, 'content_locator')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'locator_options')->textInput(['maxlength' => true]) ?>
+    <?= JsonForm::widget([
+        'id'=>'locator_options',
+        'json'=>$model->locator_options,
+        'jsonFieldId'=>'provider-locator_options',
+        'variables' => $model->getOptionVars(),
+        'labels'=>true,
+    ]); ?>
 
     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
 

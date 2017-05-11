@@ -16,7 +16,7 @@ class m170510_130144_initial extends Migration
             'name' => $this->string(128)->notNull(),
             'url' => $this->string(512)->notNull()->comment('Base Url including the {itemKey} tag'),
             'active' => $this->boolean()->notNull()->defaultValue(1),
-            'content_locator' => $this->string(255)->notNull()->comment('The locator to identify the main content in item listing'),
+            'locator_options' => $this->text()->notNull()->comment('The locators to identify the main content in item listing'),
             'comment' => $this->text()->null()->comment('comments'),
         ], $tableOptions);
 
@@ -41,7 +41,7 @@ class m170510_130144_initial extends Migration
             'item_id' => $this->integer()->notNull(),
             'time_created' => $this->dateTime(6)->notNull()->comment("Time created"),
             'price' => $this->double()->comment("Item Price"),
-            'content' => $this->double()->comment("Item listing content text"),
+            'content' => $this->text()->comment("Item listing content text"),
         ], $tableOptions);
         $this->createTable('{{%user_has_item}}', [
             'user_has_item_id' => $this->primaryKey(),

@@ -20,7 +20,8 @@ class ListingSearch extends Listing
         return [
             [['listing_id', 'parse_id', 'item_id'], 'integer'],
             [['time_created'], 'safe'],
-            [['price', 'content'], 'number'],
+            [['price'], 'number'],
+            [[ 'content'], 'string'],
         ];
     }
 

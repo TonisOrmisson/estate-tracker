@@ -22,6 +22,11 @@ class ParseController extends Controller
             $this->stdout($provider->name." ...\n", Console::BOLD);
             $parse = new Parse(['provider_id'=>$provider->primaryKey]);
             $parse->time_start = DateHelper::getDatetime6();
+            if(!$parse->save()){
+                \Yii::error("Error saving parse",__METHOD__);
+                var_dump($parse->errors);
+
+            }
 
             if($provider->items){
                 foreach ($provider->items as $item){

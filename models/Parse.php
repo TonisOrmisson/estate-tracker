@@ -65,14 +65,29 @@ class Parse extends \yii\db\ActiveRecord
         $doc = new \DOMDocument();
         $doc->loadHTML('<?xml encoding="UTF-8">' .$html);
         $finder = new \DomXPath($doc);
-        $locatorData = Json::decode($this->provider->content_locator);
-        $nodes = $finder->query("//*[contains(@class, '".$locatorData['class']."')]");
-        $content = $nodes->item(0)->textContent;
+        $locatorData = Json::decode($this->provider->locator_options);
+
+        $contentNodes = $finder->query("//*[contains(@class, '".$locatorData['contentClass']."')]");
+        $contentNode = $contentNodes->item(0);
+        $content = $contentNode->ownerDocument->saveHTML($contentNode);
+
+        $priceNodes = $finder->query("//*[contains(@class, '".$locatorData['priceClass']."')]");
+        $price = strtolower($priceNodes->item(0)->textContent);
+        $patterns[] = '/\s+/';
+        $patterns[0] = '/eur/';
+        $price = intval(trim(preg_replace('/\s+/', '', $price)));
 
         $listing = new Listing();
+        $listing->parse_id = $this->primaryKey;
         $listing->item_id = $item->primaryKey;
         $listing->time_created = DateHelper::getDatetime6();
         $listing->content = $content;
+        $listing->price = $price;
+        if(!$listing->save()){
+            Yii::error("Error saving listing",__METHOD__);
+            var_dump($listing->errors);
+        }
+
     }
 
 

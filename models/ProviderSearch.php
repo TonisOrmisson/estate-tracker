@@ -19,7 +19,7 @@ class ProviderSearch extends Provider
     {
         return [
             [['provider_id', 'active'], 'integer'],
-            [['name', 'url', 'content_locator', 'comment'], 'safe'],
+            [['name', 'url', 'locator_options', 'comment'], 'safe'],
         ];
     }
 
@@ -65,7 +65,7 @@ class ProviderSearch extends Provider
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'content_locator', $this->content_locator])
+            ->andFilterWhere(['like', 'locator_options', $this->locator_options])
             ->andFilterWhere(['like', 'comment', $this->comment]);
 
         return $dataProvider;

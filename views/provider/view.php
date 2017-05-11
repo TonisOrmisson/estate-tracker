@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'url:url',
             'active',
-            'content_locator',
+            'locator_options',
             'comment:ntext',
         ],
     ]) ?>

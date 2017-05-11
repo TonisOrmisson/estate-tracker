@@ -12,7 +12,7 @@ use Yii;
  * @property integer $item_id
  * @property string $time_created
  * @property double $price
- * @property double $content
+ * @property string $content
  *
  * @property Item $item
  * @property Parse $parse
@@ -36,7 +36,8 @@ class Listing extends \yii\db\ActiveRecord
             [['parse_id', 'item_id', 'time_created'], 'required'],
             [['parse_id', 'item_id'], 'integer'],
             [['time_created'], 'safe'],
-            [['price', 'content'], 'number'],
+            [['price'], 'number'],
+            [['content'], 'string','max'=>10*1024],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'item_id']],
             [['parse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Parse::className(), 'targetAttribute' => ['parse_id' => 'parse_id']],
         ];

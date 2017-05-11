@@ -11,7 +11,7 @@ use Yii;
  * @property string $name
  * @property string $url
  * @property integer $active
- * @property string $content_locator
+ * @property string $locator_options
  * @property string $comment
  *
  * @property Item[] $items
@@ -33,12 +33,12 @@ class Provider extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'url', 'content_locator' ], 'required'],
+            [['name', 'url', 'locator_options' ], 'required'],
             [['active'], 'integer'],
             [['comment'], 'string'],
             [['name'], 'string', 'max' => 128],
             [['url'], 'string', 'max' => 512],
-            [['content_locator'], 'string', 'max' => 255],
+            [['locator_options'], 'string', 'max' => 1024*2],
         ];
     }
 
@@ -52,11 +52,23 @@ class Provider extends \yii\db\ActiveRecord
             'name' => Yii::t('app', 'Name'),
             'url' => Yii::t('app', 'Base Url including the {itemKey} tag'),
             'active' => Yii::t('app', 'Active'),
-            'content_locator' => Yii::t('app', 'The locator to identify the main content in item listing'),
+            'locator_options' => Yii::t('app', 'The locator to identify the main content in item listing'),
             'comment' => Yii::t('app', 'comments'),
         ];
     }
 
+    /* @inheritdoc */
+    public function getOptionVars()
+    {
+        return [
+            'contentClass'=>[
+                'label' => Yii::t('app','Item main content class name'),
+            ],
+            'priceClass'=>[
+                'label' => Yii::t('app','Price element class name'),
+            ],
+        ];
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

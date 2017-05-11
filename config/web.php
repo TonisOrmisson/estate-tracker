@@ -5,7 +5,7 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'timezone' => 'Europe/Tallinn',
+    'timeZone' => 'Europe/Tallinn',
     'bootstrap' => [
         'log',
         'app\bootstraps\AppBootstrap',

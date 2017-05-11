@@ -3,6 +3,7 @@
 namespace app\commands;
 
 use andmemasin\helpers\DateHelper;
+use app\models\Item;
 use app\models\Parse;
 use app\models\Provider;
 use yii\console\Controller;
@@ -28,12 +29,10 @@ class ParseController extends Controller
 
             }
 
-            if($provider->items){
-                foreach ($provider->items as $item){
-                    $this->stdout($item->key." \n", Console::FG_BLUE);
-                    $parse->parse($item);
-                }
-            }
+            $item = $provider->firstUpdatedItem;
+            $this->stdout($item->key." \n", Console::FG_BLUE);
+            $parse->parse($item);
+
         }
     }
 }

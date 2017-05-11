@@ -16,6 +16,7 @@ use Yii;
  *
  * @property Item[] $items
  * @property Parse[] $parses
+ * @property Item $firstUpdatedItem
  */
 class Provider extends \yii\db\ActiveRecord
 {
@@ -56,6 +57,31 @@ class Provider extends \yii\db\ActiveRecord
             'comment' => Yii::t('app', 'comments'),
         ];
     }
+
+    /**
+     * Gte the item from that provider that was updated first (most time passed)
+     * @return Item
+     */
+    public function getFirstUpdatedItem(){
+        $subQuery = Listing::find()
+            ->select('time_created')
+            ->andWhere('item_id =`item`.`item_id`')
+            ->orderBy('time_created DESC')
+            ->limit(1)
+            ->createCommand()->rawSql;
+
+        $query = Item::find()
+            ->select(['item.*','('.$subQuery.') as time_last_listing'])
+            ->andWhere(['provider_id'=>$this->primaryKey])
+            ->orderBy('time_last_listing')
+            ->limit(1)
+        ;
+        //echo $query->createCommand()->rawSql;
+        /** @var Item $model */
+        $model=$query->one();
+        return $model;
+    }
+
 
     /* @inheritdoc */
     public function getOptionVars()

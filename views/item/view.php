@@ -9,6 +9,7 @@ use yii\widgets\DetailView;
 $this->title = $model->item_id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="item-view">
 

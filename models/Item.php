@@ -3,6 +3,7 @@
 namespace app\models;
 
 use andmemasin\helpers\Replacer;
+use function Sodium\library_version_minor;
 use Yii;
 use yii\db\Expression;
 
@@ -18,6 +19,7 @@ use yii\db\Expression;
  * @property Listing[] $listings
  * @property UserHasItem[] $userHasItems
  * @property string $url
+ * @property array $itemStats
  */
 class Item extends \yii\db\ActiveRecord
 {
@@ -56,21 +58,23 @@ class Item extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getStats(){
+    public function getItemStats(){
 
         $query = $this->getListings()
             ->select([
-                new Expression('DATE_FORMAT(time_created,"%Y-%m-%d %H:00:00") AS period'),
+                new Expression('DATE_FORMAT(time_created,"%Y-%m-%d %H:%i:00") AS period'),
                 'price'
             ]);
         return $query->createCommand()->queryAll();
     }
 
+
+
     /**
      * @return array
      */
     public function getChartData(){
-        $data = $this->getStats();
+        $data = $this->itemStats;
         $out = [];
         if(!empty($data)){
             foreach ($data as $item) {

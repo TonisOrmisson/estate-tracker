@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use andmemasin\helpers\Replacer;
 use Yii;
 
 /**
@@ -15,6 +16,7 @@ use Yii;
  * @property Provider $provider
  * @property Listing[] $listings
  * @property UserHasItem[] $userHasItems
+ * @property string $url
  */
 class Item extends \yii\db\ActiveRecord
 {
@@ -51,6 +53,16 @@ class Item extends \yii\db\ActiveRecord
             'key' => Yii::t('app', 'The item key/id in the provider to identify the item'),
             'time_created' => Yii::t('app', 'Time created'),
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(){
+        $params = [
+            'itemKey' =>$this->key
+        ];
+        return Replacer::replace($this->provider->url,$params);
     }
 
     /**

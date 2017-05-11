@@ -2,7 +2,9 @@
 
 namespace app\models;
 
+use andmemasin\helpers\DateHelper;
 use Yii;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "parse".
@@ -52,6 +54,27 @@ class Parse extends \yii\db\ActiveRecord
             'items_parsed' => Yii::t('app', 'Items Parsed'),
         ];
     }
+
+    /**
+     * @param Item $item
+     */
+    public function parse($item)
+    {
+        $html = Response::getResponse($item->url);
+        libxml_use_internal_errors(true);
+        $doc = new \DOMDocument();
+        $doc->loadHTML('<?xml encoding="UTF-8">' .$html);
+        $finder = new \DomXPath($doc);
+        $locatorData = Json::decode($this->provider->content_locator);
+        $nodes = $finder->query("//*[contains(@class, '".$locatorData['class']."')]");
+        $content = $nodes->item(0)->textContent;
+
+        $listing = new Listing();
+        $listing->item_id = $item->primaryKey;
+        $listing->time_created = DateHelper::getDatetime6();
+        $listing->content = $content;
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery

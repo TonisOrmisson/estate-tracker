@@ -4,14 +4,20 @@
     "keywords": ["yii2", "framework", "basic", "project template"],
     "homepage": "http://www.yiiframework.com/",
     "type": "project",
-    "license": "BSD-3-Clause",
-    "minimum-stability": "stable",
+    "license": "proprietary",
+    "minimum-stability": "dev",
+    "repositories": [
+      {"url": "https://t6nnp6nn@bitbucket.org/andmemasin/helpers.git", "type": "vcs"}
+
+    ],
+    "prefer-stable":true,
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.5",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "dektrium/yii2-user":"0.9.*"
+        "dektrium/yii2-user":"0.9.*",
+        "andmemasin/helpers": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -17,7 +17,7 @@ class m170510_130144_initial extends Migration
             'url' => $this->string(512)->notNull()->comment('Base Url including the {itemKey} tag'),
             'active' => $this->boolean()->notNull()->defaultValue(1),
             'content_locator' => $this->string(255)->notNull()->comment('The locator to identify the main content in item listing'),
-            'comment' => $this->text()->notNull()->comment('comments'),
+            'comment' => $this->text()->null()->comment('comments'),
         ], $tableOptions);
 
         $this->createTable('{{%parse}}', [

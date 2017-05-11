@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use andmemasin\helpers\DateHelper;
 use Yii;
 use app\models\Item;
 use app\models\ItemSearch;
@@ -64,6 +65,7 @@ class ItemController extends Controller
     public function actionCreate()
     {
         $model = new Item();
+        $model->time_created = DateHelper::getDatetime6();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->item_id]);

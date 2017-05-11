@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use andmemasin\helpers\DateHelper;
 use Yii;
 use app\models\Listing;
 use app\models\ListingSearch;
@@ -64,6 +65,7 @@ class ListingController extends Controller
     public function actionCreate()
     {
         $model = new Listing();
+        $model->time_created = DateHelper::getDatetime6();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->listing_id]);

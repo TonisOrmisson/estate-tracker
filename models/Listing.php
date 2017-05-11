@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "listing".
@@ -57,6 +58,7 @@ class Listing extends \yii\db\ActiveRecord
             'content' => Yii::t('app', 'Item listing content text'),
         ];
     }
+
 
     /**
      * @return \yii\db\ActiveQuery

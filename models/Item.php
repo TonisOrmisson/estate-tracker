@@ -4,6 +4,7 @@ namespace app\models;
 
 use andmemasin\helpers\Replacer;
 use Yii;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "item".
@@ -53,6 +54,31 @@ class Item extends \yii\db\ActiveRecord
             'key' => Yii::t('app', 'The item key/id in the provider to identify the item'),
             'time_created' => Yii::t('app', 'Time created'),
         ];
+    }
+
+    public function getStats(){
+
+        $query = $this->getListings()
+            ->select([
+                new Expression('DATE_FORMAT(time_created,"%Y-%m-%d %H:00:00") AS period'),
+                'price'
+            ]);
+        return $query->createCommand()->queryAll();
+    }
+
+    /**
+     * @return array
+     */
+    public function getChartData(){
+        $data = $this->getStats();
+        $out = [];
+        if(!empty($data)){
+            foreach ($data as $item) {
+                $date = new \DateTime($item['period']);
+                $out[] =[($date->format('U') * 1000),(integer) $item['price']];
+            }
+        }
+        return $out;
     }
 
     /**

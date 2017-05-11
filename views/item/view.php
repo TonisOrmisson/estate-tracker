@@ -34,5 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'time_created',
         ],
     ]) ?>
+    <?= $this->render('_chart', [
+        'model' => $model,
+    ]) ?>
 
 </div>

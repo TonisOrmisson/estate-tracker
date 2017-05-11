@@ -60,7 +60,16 @@ class Item extends \yii\db\ActiveRecord
             'time_created' => Yii::t('app', 'Time created'),
         ];
     }
-
+    /**
+     * @inheritdoc
+     */
+    public function attributeHints()
+    {
+        return [
+            'key' => Yii::t('app', 'Look for an ID in the item URL'),
+            'm2' => Yii::t('app', 'The m2 will be updated automatically while the data is parsed, but you can also set it manually'),
+        ];
+    }
     public function getItemStats(){
 
         $query = $this->getListings()

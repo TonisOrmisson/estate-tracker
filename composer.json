@@ -20,6 +20,7 @@
         "dektrium/yii2-user":"0.9.*",
         "andmemasin/helpers": "dev-master",
         "andmemasin/yii2-json-form": "1.2.*",
+        "kartik-v/yii2-widget-select2": "@dev",
         "miloschuman/yii2-highcharts-widget": "*"
 
 

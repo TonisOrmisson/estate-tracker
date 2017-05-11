@@ -1,7 +1,10 @@
 <?php
 
+use app\models\Provider;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Item */
@@ -12,7 +15,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'provider_id')->textInput() ?>
+    <?= $form->field($model, 'provider_id')->widget(Select2::className(), [
+        'data' => ArrayHelper::map(Provider::find()->all(),'provider_id','name'),
+        'options' => [
+            'placeholder' => Yii::t('app', 'Select provider'),
+        ],
+        'pluginOptions' => [
+            'allowClear' => false,
+        ]
+    ]);?>
 
     <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'm2')->textInput(['maxlength' => true]) ?>

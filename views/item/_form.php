@@ -25,7 +25,7 @@ use yii\helpers\ArrayHelper;
         ]
     ]);?>
 
-    <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'key',['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'm2')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">

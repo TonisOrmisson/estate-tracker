@@ -43,6 +43,7 @@ class Item extends \yii\db\ActiveRecord
             [['time_created'], 'safe'],
             [['m2'], 'number'],
             [['key'], 'string', 'max' => 255],
+            ['key', 'unique', 'targetAttribute' => ['key', 'provider_id']],
             [['provider_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provider::className(), 'targetAttribute' => ['provider_id' => 'provider_id']],
         ];
     }

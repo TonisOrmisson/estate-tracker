@@ -10,7 +10,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 /**
  * ItemController implements the CRUD actions for Item model.
  */
@@ -76,6 +77,10 @@ class ItemController extends Controller
     {
         $model = new Item();
         $model->time_created = DateHelper::getDatetime6();
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->item_id]);

@@ -37,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'key',
             'm2',
             'time_created',
+            'time_changed',
         ],
     ]) ?>
 

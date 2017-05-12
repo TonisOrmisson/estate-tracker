@@ -88,9 +88,16 @@ class Parse extends \yii\db\ActiveRecord
         $listing->price = $price;
         $listing->m2 = $m2;
 
+        if($listing->isChange){
+            $listing->change =  true;
+            $item->time_changed = DateHelper::getDatetime6();
+        }
+
         if(!$listing->save()){
             Yii::error("Error saving listing",__METHOD__);
             var_dump($listing->errors);
+        }else{
+            $item->save();
         }
         if($listing->m2 <> $item->m2){
             $item->m2= $listing->m2;

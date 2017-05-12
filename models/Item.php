@@ -14,9 +14,11 @@ use yii\db\Expression;
  * @property integer $provider_id
  * @property string $key
  * @property string $time_created
+ * @property string $time_changed
  *
  * @property Provider $provider
  * @property Listing[] $listings
+ * @property Listing $lastListing
  * @property UserHasItem[] $userHasItems
  * @property string $url
  * @property array $itemStats
@@ -40,7 +42,7 @@ class Item extends \yii\db\ActiveRecord
         return [
             [['provider_id', 'key', 'time_created'], 'required'],
             [['provider_id'], 'integer'],
-            [['time_created'], 'safe'],
+            [['time_created','time_changed'], 'safe'],
             [['m2'], 'number'],
             [['key'], 'string', 'max' => 255],
             ['key', 'unique', 'targetAttribute' => ['key', 'provider_id']],
@@ -59,6 +61,7 @@ class Item extends \yii\db\ActiveRecord
             'key' => Yii::t('app', 'The item key/id in the provider to identify the item'),
             'm2' => Yii::t('app', 'Item floor area in m2'),
             'time_created' => Yii::t('app', 'Time created'),
+            'time_changed' => Yii::t('app', 'Time of last change in source'),
         ];
     }
     /**
@@ -119,6 +122,24 @@ class Item extends \yii\db\ActiveRecord
     public function getProvider()
     {
         return $this->hasOne(Provider::className(), ['provider_id' => 'provider_id']);
+    }
+
+    /**
+     * @param int $notThisId An ID that we want to eliminate from search 
+     * @return Listing
+     */
+    public function getLastListing($notThisId = null)
+    {
+        $query = $this->getListings()
+            ->orderBy(['listing_id'=>SORT_DESC])
+            ->limit(1);
+        if($notThisId){
+            $query->andWhere([new Expression('ne'),'listing_id',$notThisId]);
+        }
+        
+        /** @var Listing $model */
+        $model = $query->one();
+        return $model;
     }
 
     /**

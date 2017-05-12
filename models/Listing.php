@@ -10,12 +10,14 @@ use yii\db\Expression;
  *
  * @property integer $listing_id
  * @property integer $parse_id
+ * @property integer $change
  * @property integer $item_id
  * @property string $time_created
  * @property double $price
  * @property double $m2
  * @property string $content
  *
+ * @property boolean $isChange Whether there is a change vs last Listing of this item
  * @property Item $item
  * @property Parse $parse
  */
@@ -36,7 +38,7 @@ class Listing extends \yii\db\ActiveRecord
     {
         return [
             [['parse_id', 'item_id', 'time_created'], 'required'],
-            [['parse_id', 'item_id'], 'integer'],
+            [['parse_id', 'item_id','change'], 'integer'],
             [['time_created'], 'safe'],
             [['price','m2'], 'number'],
             [['content'], 'string','max'=>10*1024],
@@ -58,7 +60,21 @@ class Listing extends \yii\db\ActiveRecord
             'price' => Yii::t('app', 'Item Price'),
             'm2' => Yii::t('app', 'Item floor area in m2'),
             'content' => Yii::t('app', 'Item listing content text'),
+            'change' => Yii::t('app', 'Was change detected?'),
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsChange(){
+        // not $this itself
+        $lastListing = $this->item->getLastListing($this->primaryKey);
+        if($lastListing->price <> $this->price){
+            return true;
+        }
+        return false;
+
     }
 
 

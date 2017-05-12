@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'listing_id',
             'item_id',
             'time_created',
+            'change',
             'price',
             'm2',
 

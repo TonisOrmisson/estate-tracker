@@ -64,7 +64,7 @@ class Parse extends \yii\db\ActiveRecord
         $listing->parse_id = $this->primaryKey;
         $listing->item_id = $item->primaryKey;
         $listing->time_created = DateHelper::getDatetime6();
-        $listing->is_success = false;
+        $listing->is_success = 0;
 
         $listing->save();
 
@@ -81,8 +81,8 @@ class Parse extends \yii\db\ActiveRecord
             $content = $contentNode->ownerDocument->saveHTML($contentNode);
 
         }catch (\ErrorException $exception){
-            Yii::error('Error parsing item ID: '.$item->primaryKey.' for '.$item->provider->name.':'.$item->key.' url:'.$item->url,__METHOD__);
             $listing->save();
+            Yii::error('Error parsing item ID: '.$item->primaryKey.' for '.$item->provider->name.':'.$item->key.' url:'.$item->url,__METHOD__);
             return;
         }
 
@@ -104,7 +104,7 @@ class Parse extends \yii\db\ActiveRecord
             $listing->change =  true;
             $item->time_changed = DateHelper::getDatetime6();
         }
-        $listing->is_success = true;
+        $listing->is_success = 1;
 
         if(!$listing->save()){
             Yii::error("Error saving listing",__METHOD__);

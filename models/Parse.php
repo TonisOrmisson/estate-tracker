@@ -67,9 +67,16 @@ class Parse extends \yii\db\ActiveRecord
         $finder = new \DomXPath($doc);
         $locatorData = Json::decode($this->provider->locator_options);
 
-        $contentNodes = $finder->query("//*[contains(@class, '".$locatorData['contentClass']."')]");
-        $contentNode = $contentNodes->item(0);
-        $content = $contentNode->ownerDocument->saveHTML($contentNode);
+        try{
+            $contentNodes = $finder->query("//*[contains(@class, '".$locatorData['contentClass']."')]");
+            $contentNode = $contentNodes->item(0);
+            $content = $contentNode->ownerDocument->saveHTML($contentNode);
+
+        }catch (\ErrorException $exception){
+            Yii::error('Error parsing item ID: '.$item->primaryKey.' for '.$item->provider->name.':'.$item->key,__METHOD__);
+            return;
+        }
+
 
         $priceNodes = $finder->query("//*[contains(@class, '".$locatorData['priceClass']."')]");
         $price = strtolower($priceNodes->item(0)->textContent);

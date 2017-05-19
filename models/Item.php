@@ -134,7 +134,7 @@ class Item extends \yii\db\ActiveRecord
             ->orderBy(['listing_id'=>SORT_DESC])
             ->limit(1);
         if($notThisId){
-            $query->andWhere([new Expression('ne'),'listing_id',$notThisId]);
+            $query->andWhere([new Expression('!='),'listing_id',$notThisId]);
         }
         
         /** @var Listing $model */

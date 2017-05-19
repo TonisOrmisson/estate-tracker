@@ -73,7 +73,7 @@ class Parse extends \yii\db\ActiveRecord
             $content = $contentNode->ownerDocument->saveHTML($contentNode);
 
         }catch (\ErrorException $exception){
-            Yii::error('Error parsing item ID: '.$item->primaryKey.' for '.$item->provider->name.':'.$item->key,__METHOD__);
+            Yii::error('Error parsing item ID: '.$item->primaryKey.' for '.$item->provider->name.':'.$item->key.' url:'.$item->url,__METHOD__);
             return;
         }
 

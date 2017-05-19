@@ -11,6 +11,7 @@ use yii\db\Expression;
  * @property integer $listing_id
  * @property integer $parse_id
  * @property integer $change
+ * @property integer $is_success
  * @property integer $item_id
  * @property string $time_created
  * @property double $price
@@ -38,7 +39,7 @@ class Listing extends \yii\db\ActiveRecord
     {
         return [
             [['parse_id', 'item_id', 'time_created'], 'required'],
-            [['parse_id', 'item_id','change'], 'integer'],
+            [['parse_id', 'item_id','change','is_success'], 'integer'],
             [['time_created'], 'safe'],
             [['price','m2'], 'number'],
             [['content'], 'string','max'=>10*1024],
@@ -61,6 +62,7 @@ class Listing extends \yii\db\ActiveRecord
             'm2' => Yii::t('app', 'Item floor area in m2'),
             'content' => Yii::t('app', 'Item listing content text'),
             'change' => Yii::t('app', 'Was change detected?'),
+            'is_success' => Yii::t('app', 'Was parse successful?'),
         ];
     }
 

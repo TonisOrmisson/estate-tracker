@@ -60,6 +60,13 @@ class Parse extends \yii\db\ActiveRecord
      */
     public function parse($item)
     {
+        $listing = new Listing();
+        $listing->parse_id = $this->primaryKey;
+        $listing->item_id = $item->primaryKey;
+        $listing->time_created = DateHelper::getDatetime6();
+
+        $listing->save();
+
         $html = Response::getResponse($item->url);
         libxml_use_internal_errors(true);
         $doc = new \DOMDocument();
@@ -87,10 +94,6 @@ class Parse extends \yii\db\ActiveRecord
         $m2Node = $doc->getElementById($locatorData['m2Id']);
         $m2 = doubleval(trim($m2Node->getAttribute('value')));
 
-        $listing = new Listing();
-        $listing->parse_id = $this->primaryKey;
-        $listing->item_id = $item->primaryKey;
-        $listing->time_created = DateHelper::getDatetime6();
         $listing->content = $content;
         $listing->price = $price;
         $listing->m2 = $m2;

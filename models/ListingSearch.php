@@ -18,7 +18,7 @@ class ListingSearch extends Listing
     public function rules()
     {
         return [
-            [['listing_id', 'parse_id', 'item_id','change'], 'integer'],
+            [['listing_id', 'parse_id', 'item_id','change','is_success'], 'integer'],
             [['time_created'], 'safe'],
             [['price'], 'number'],
             [[ 'content'], 'string'],
@@ -66,6 +66,7 @@ class ListingSearch extends Listing
             'item_id' => $this->item_id,
             'time_created' => $this->time_created,
             'change' => $this->change,
+            'is_success' => $this->is_success,
             'price' => $this->price,
             'content' => $this->content,
         ]);

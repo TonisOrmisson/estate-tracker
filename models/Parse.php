@@ -64,6 +64,7 @@ class Parse extends \yii\db\ActiveRecord
         $listing->parse_id = $this->primaryKey;
         $listing->item_id = $item->primaryKey;
         $listing->time_created = DateHelper::getDatetime6();
+        $listing->is_success = false;
 
         $listing->save();
 
@@ -102,6 +103,7 @@ class Parse extends \yii\db\ActiveRecord
             $listing->change =  true;
             $item->time_changed = DateHelper::getDatetime6();
         }
+        $listing->is_success = true;
 
         if(!$listing->save()){
             Yii::error("Error saving listing",__METHOD__);

@@ -143,6 +143,25 @@ class Item extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param int $notThisId An ID that we want to eliminate from search
+     * @return Listing
+     */
+    public function getLastSuccessfulListing($notThisId = null)
+    {
+        $query = $this->getListings()
+            ->orderBy(['listing_id'=>SORT_DESC])
+            ->limit(1)
+        ->andWhere(['is_success'=>1]);
+        if($notThisId){
+            $query->andWhere([new Expression('!='),'listing_id',$notThisId]);
+        }
+
+        /** @var Listing $model */
+        $model = $query->one();
+        return $model;
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getListings()

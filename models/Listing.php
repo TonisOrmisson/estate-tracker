@@ -71,7 +71,7 @@ class Listing extends \yii\db\ActiveRecord
      */
     public function getIsChange(){
         // not $this itself
-        $lastListing = $this->item->getLastListing($this->primaryKey);
+        $lastListing = $this->item->getLastSuccessfulListing($this->primaryKey);
         if(!$lastListing){
             // initial
             return false;

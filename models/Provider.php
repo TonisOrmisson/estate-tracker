@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "provider".
@@ -18,7 +19,7 @@ use Yii;
  * @property Parse[] $parses
  * @property Item $firstUpdatedItem
  */
-class Provider extends \yii\db\ActiveRecord
+class Provider extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -81,6 +82,7 @@ class Provider extends \yii\db\ActiveRecord
         $query = Item::find()
             ->select(['item.*','('.$subQuery.') as time_last_listing'])
             ->andWhere(['provider_id'=>$this->primaryKey])
+            ->andWhere(['active'=>1])
             ->orderBy('time_last_listing')
             ->limit(1)
         ;

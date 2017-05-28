@@ -36,6 +36,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             'target'=>'_blank']);
                 }
             ],
+            [
+                'format'=>'raw',
+                'header'=>Yii::t('app','Source'),
+                'value'=>function($model){
+                    /** @var \app\models\Listing $model  */
+                    return Html::a(Yii::t('app','Source'), Url::to($model->item->url),[
+                        'target'=>'_blank',
+                        'class'=>'btn btn-success'
+                    ]);
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn',
             'template'=>'{view}'],

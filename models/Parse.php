@@ -60,11 +60,21 @@ class Parse extends \yii\db\ActiveRecord
      */
     public function parse($item)
     {
+
         $listing = new Listing();
         $listing->parse_id = $this->primaryKey;
         $listing->item_id = $item->primaryKey;
         $listing->time_created = DateHelper::getDatetime6();
         $listing->is_success = 0;
+
+        // disable if not working
+        if(!$item->isWorking){
+            $item->active = 0;
+            $item->time_changed = DateHelper::getDatetime6();
+            $listing->save();
+            $item->save();
+            return;
+        }
 
         $listing->save();
 

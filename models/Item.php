@@ -24,6 +24,7 @@ use yii\db\Expression;
  * @property array $itemStats
  * @property double $m2
  * @property integer $active
+ * @property boolean $isWorking
  */
 class Item extends \yii\db\ActiveRecord
 {
@@ -83,6 +84,25 @@ class Item extends \yii\db\ActiveRecord
                 'price'
             ]);
         return $query->createCommand()->queryAll();
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsWorking()
+    {
+        $checkCount = 5;
+        $listings = $this->getLastListings($checkCount);
+        if($listings){
+            $countFailed = 0;
+            foreach ($listings as $listing){
+                if($listing->is_success <> 1){
+                    $countFailed ++;
+                }
+            }
+            return ($countFailed != $checkCount);
+        }
+        return true;
     }
 
 
@@ -168,6 +188,21 @@ class Item extends \yii\db\ActiveRecord
     public function getListings()
     {
         return $this->hasMany(Listing::className(), ['item_id' => 'item_id']);
+    }
+
+    /**
+     * @param $count
+     * @return Listing[]
+     */
+    public function getLastListings($count){
+        $query = Listing::find()
+            ->andWhere(['item_id'=>$this->item_id])
+            ->orderBy(['listing_id'=>SORT_DESC])
+            ->limit($count);
+        /** @var Listing[] $models */
+        $models = $query->all();
+        return $models;
+
     }
 
     /**

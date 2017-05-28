@@ -68,7 +68,7 @@ class Provider extends ActiveRecord
     }
 
     /**
-     * Gte the item from that provider that was updated first (most time passed)
+     * Get the item from that provider that was updated first (most time passed)
      * @return Item
      */
     public function getFirstUpdatedItem(){

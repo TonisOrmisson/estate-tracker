@@ -23,6 +23,7 @@ use yii\db\Expression;
  * @property string $url
  * @property array $itemStats
  * @property double $m2
+ * @property integer $active
  */
 class Item extends \yii\db\ActiveRecord
 {
@@ -40,8 +41,8 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['provider_id', 'key', 'time_created'], 'required'],
-            [['provider_id'], 'integer'],
+            [['provider_id', 'key', 'time_created','active'], 'required'],
+            [['provider_id','active'], 'integer'],
             [['time_created','time_changed'], 'safe'],
             [['m2'], 'number'],
             [['key'], 'string', 'max' => 255],

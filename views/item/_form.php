@@ -27,6 +27,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'key',['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'm2')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'active')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

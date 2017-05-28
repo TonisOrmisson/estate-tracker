@@ -1,5 +1,5 @@
 {
-    "name": "tonisormisson/yii2-user-template",
+    "name": "tonisormisson/estate-tracker",
     "description": "Yii 2 Basic Project Template implementing Yii2-user",
     "keywords": ["yii2", "framework", "basic", "project template"],
     "homepage": "http://www.yiiframework.com/",
@@ -28,12 +28,8 @@
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
-        "yiisoft/yii2-gii": "~2.0.0",
-        "yiisoft/yii2-faker": "~2.0.0",
+        "yiisoft/yii2-gii": "~2.0.0"
 
-        "codeception/base": "^2.2.3",
-        "codeception/verify": "~0.3.1",
-        "codeception/specify": "~0.4.3"
     },
     "config": {
         "process-timeout": 1800

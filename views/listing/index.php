@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ListingSearch */
@@ -25,6 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'is_success',
             'price',
             'm2',
+            [
+                'format'=>'raw',
+                'header'=>Yii::t('app','Item'),
+                'value'=>function($model){
+                    /** @var \app\models\Listing $model  */
+                    return Html::a(Yii::t('app', 'Item'), ['item/view', 'id' => $model->item_id],
+                        ['class' => 'btn btn-primary',
+                            'target'=>'_blank']);
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn',
             'template'=>'{view}'],

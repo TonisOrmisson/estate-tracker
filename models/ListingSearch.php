@@ -49,15 +49,21 @@ class ListingSearch extends Listing
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
-                'pageSize' => 10,
-            ],        ]);
+                'pagination' => [
+                    'pageSize' => 10,
+                    ],
+                'sort' => [
+                    'defaultOrder' => [
+                        'listing_id' => SORT_DESC,
+                    ]
+                ],
+            ]);
 
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+            $query->where('0=1');
             return $dataProvider;
         }
 
@@ -72,7 +78,6 @@ class ListingSearch extends Listing
             'price' => $this->price,
             'content' => $this->content,
         ]);
-        $query->orderBy(['listing_id'=>SORT_DESC]);
 
         return $dataProvider;
     }

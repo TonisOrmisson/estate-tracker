@@ -16,10 +16,6 @@ return [
         'enableSwiftMailerLogging' => true,
         'transport' => [
             'class' => 'Swift_SmtpTransport',
-            [
-                'class' => 'Swift_Plugins_LoggerPlugin',
-                'constructArgs' => [new Swift_Plugins_Loggers_EchoLogger],
-            ],
             'host' => '',
             'username' => '',
             'password' => '',

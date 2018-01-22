@@ -1,0 +1,40 @@
+version: '2'
+services:
+  nginx:
+    image: evild/alpine-nginx:1.9.15-openssl
+    container_name: estatetrack_nginx
+    restart: always
+    links:
+      - php
+    volumes:
+      - ./:/var/www/html/:ro
+      - ./nginx/conf/nginx.conf:/etc/nginx/conf/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    ports:
+      - 80:80
+      - 443:443
+  php:
+    image: evild/alpine-php:7.0.6
+    container_name: estatetrack_php
+    restart: always
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      - DB_NAME=lemp_bdd
+      - DB_HOST=lemp
+      - DB_PASSWORD=password
+  db:
+    image: mariadb:latest
+    container_name: estatetrack_mariadb
+    restart: always
+    volumes:
+      - ./.db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+volumes:
+  db-data:
+    driver: local

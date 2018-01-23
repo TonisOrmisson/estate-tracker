@@ -13,10 +13,14 @@ services:
     ports:
       - 80:80
       - 443:443
+    depends_on:
+      - db
+      - php
   php:
-    image: evild/alpine-php:7.0.6
+    build: docker/php
     container_name: estatetrack_php
     restart: always
+
     volumes:
       - ./:/var/www/html
     depends_on:
@@ -24,7 +28,7 @@ services:
     links:
       - db
     environment:
-      - DB_NAME=lemp_bdd
+      - DB_NAME=estatetrack
       - DB_HOST=lemp
       - DB_PASSWORD=password
   db:
@@ -35,6 +39,16 @@ services:
       - ./.db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - 3306:3306
+  composer:
+    build: docker/composer
+    depends_on:
+      - php
+      - nginx
+    volumes:
+        - "./:/app"
+    command: install
 volumes:
   db-data:
     driver: local

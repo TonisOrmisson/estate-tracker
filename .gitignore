@@ -1,6 +1,7 @@
 # phpstorm project files
 .*
 !.gitignore
+!.bowerrc
 
 # composer vendor dir
 /vendor

@@ -7,8 +7,14 @@
     "license": "proprietary",
     "minimum-stability": "dev",
     "repositories": [
-      {"url": "https://t6nnp6nn@bitbucket.org/andmemasin/yii2-json-form.git", "type": "vcs"},
-      {"url": "https://t6nnp6nn@bitbucket.org/andmemasin/helpers.git", "type": "vcs"}
+        {
+            "type" : "composer",
+            "url" : "https://packages.andmemasin.eu/"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
 
     ],
     "prefer-stable":true,

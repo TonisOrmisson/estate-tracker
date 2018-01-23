@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5239c19d4b8c10918c31ed152a3638f",
-    "content-hash": "0a66e2d7dd804ef1b298a238b8059918",
+    "hash": "dac3d13ab9d6425156fb95eddeee4069",
+    "content-hash": "a39acce77af3145102d969e4a52ee432",
     "packages": [
         {
             "name": "andmemasin/helpers",
@@ -130,25 +130,6 @@
                 "mobile-first",
                 "responsive",
                 "web"
-            ]
-        },
-        {
-            "name": "bower-asset/highcharts",
-            "version": "v6.0.4",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:highcharts/highcharts-dist.git",
-                "reference": "30ec756a1347cf7d2c5c51302777c93f1493023c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/highcharts/highcharts-dist/zipball/30ec756a1347cf7d2c5c51302777c93f1493023c",
-                "reference": "30ec756a1347cf7d2c5c51302777c93f1493023c",
-                "shasum": null
-            },
-            "type": "bower-asset",
-            "license": [
-                "https://www.highcharts.com/license"
             ]
         },
         {
@@ -758,20 +739,19 @@
         },
         {
             "name": "miloschuman/yii2-highcharts-widget",
-            "version": "v6.0",
+            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/miloschuman/yii2-highcharts.git",
-                "reference": "19d205b8775f26e7c1a5c6560ec20e23c480c244"
+                "reference": "911c8bb86b6343b1758bca76cce58339092f2926"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/miloschuman/yii2-highcharts/zipball/19d205b8775f26e7c1a5c6560ec20e23c480c244",
-                "reference": "19d205b8775f26e7c1a5c6560ec20e23c480c244",
+                "url": "https://api.github.com/repos/miloschuman/yii2-highcharts/zipball/911c8bb86b6343b1758bca76cce58339092f2926",
+                "reference": "911c8bb86b6343b1758bca76cce58339092f2926",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/highcharts": "^6.0",
                 "yiisoft/yii2": "*"
             },
             "require-dev": {
@@ -784,9 +764,6 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
             "authors": [
                 {
                     "name": "Milo Schuman",
@@ -803,7 +780,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-10-27 13:56:43"
+            "time": "2016-11-16 16:25:21"
         },
         {
             "name": "paragonie/random_compat",

@@ -31,7 +31,7 @@ class ParseController extends Controller
 
             $items = $provider->getParsableItems();
             $i=0;
-            if($items){
+            if(!empty($items)){
                 foreach ($items as $item){
                     $this->stdout($item->key." \n", Console::FG_BLUE);
                     $parse->parse($item);

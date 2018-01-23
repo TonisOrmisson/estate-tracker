@@ -64,7 +64,10 @@ class Provider extends ActiveRecord
      * @return Item[]
      */
     public function getParsableItems($count=1){
-        return [$this->firstUpdatedItem];
+        if($this->firstUpdatedItem){
+            return [$this->firstUpdatedItem];
+        }
+        return [];
     }
 
     /**

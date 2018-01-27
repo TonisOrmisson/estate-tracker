@@ -25,6 +25,7 @@ use yii\db\Expression;
  * @property double $m2
  * @property integer $active
  * @property string $content
+ * @property string $title
  * @property boolean $isWorking
  */
 class Item extends \yii\db\ActiveRecord
@@ -57,6 +58,7 @@ class Item extends \yii\db\ActiveRecord
             [['time_created','time_changed'], 'safe'],
             [['m2'], 'number'],
             [['content'], 'string','max'=>10*1024],
+            [['title'], 'string','max'=>1024],
             [['key'], 'string', 'max' => 255],
             ['key', 'unique', 'targetAttribute' => ['key', 'provider_id']],
             [['provider_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provider::className(), 'targetAttribute' => ['provider_id' => 'provider_id']],
@@ -76,6 +78,7 @@ class Item extends \yii\db\ActiveRecord
             'time_created' => Yii::t('app', 'Time created'),
             'time_changed' => Yii::t('app', 'Time of last change in source'),
             'content' => Yii::t('app', 'Item listing content text'),
+            'title' => Yii::t('app', 'Title'),
         ];
     }
     /**
@@ -88,6 +91,7 @@ class Item extends \yii\db\ActiveRecord
             'm2' => Yii::t('app', 'The m2 will be updated automatically while the data is parsed, but you can also set it manually'),
         ];
     }
+
     public function getItemStats(){
 
         $query = $this->getListings()

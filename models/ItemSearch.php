@@ -19,7 +19,7 @@ class ItemSearch extends Item
         return [
             [['item_id', 'provider_id','active'], 'integer'],
             [['key', 'time_created'], 'safe'],
-            [[ 'content'], 'string'],
+            [[ 'content','title'], 'string'],
         ];
     }
 
@@ -63,11 +63,12 @@ class ItemSearch extends Item
             'provider_id' => $this->provider_id,
             'time_created' => $this->time_created,
             'active' => $this->active,
-            'content' => $this->content,
         ]);
         $query->orderBy(['item_id'=>SORT_DESC]);
 
         $query->andFilterWhere(['like', 'key', $this->key]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

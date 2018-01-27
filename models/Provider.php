@@ -100,6 +100,9 @@ class Provider extends ActiveRecord
     public function getOptionVars()
     {
         return [
+            'titleClass'=>[
+                'label' => Yii::t('app','Item title class name'),
+            ],
             'contentClass'=>[
                 'label' => Yii::t('app','Item main content class name'),
             ],

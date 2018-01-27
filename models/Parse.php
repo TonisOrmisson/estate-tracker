@@ -109,6 +109,11 @@ class Parse extends \yii\db\ActiveRecord
         $listing->price = $price;
         $listing->m2 = $m2;
 
+        // get the title
+        $title = $finder->query("//*[contains(@class, '".$locatorData['titleClass']."')]")->item(0)->textContent;
+
+
+
         if($listing->isChange){
             $listing->change =  true;
             $item->time_changed = DateHelper::getDatetime6();
@@ -121,7 +126,8 @@ class Parse extends \yii\db\ActiveRecord
         }else{
             $item->save();
         }
-        if($listing->m2 <> $item->m2){
+        if($listing->m2 <> $item->m2 || $title <> $item->title ){
+            $item->title = $title;
             $item->m2= $listing->m2;
             $item->save();
 

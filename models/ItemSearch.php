@@ -17,9 +17,9 @@ class ItemSearch extends Item
     public function rules()
     {
         return [
-            [['item_id', 'provider_id','active'], 'integer'],
+            [['item_id', 'provider_id','active','rating'], 'integer'],
             [['key', 'time_created'], 'safe'],
-            [[ 'content','title'], 'string'],
+            [[ 'content','title','name'], 'string'],
         ];
     }
 
@@ -63,12 +63,14 @@ class ItemSearch extends Item
             'provider_id' => $this->provider_id,
             'time_created' => $this->time_created,
             'active' => $this->active,
+            'rating' => $this->rating,
         ]);
         $query->orderBy(['item_id'=>SORT_DESC]);
 
         $query->andFilterWhere(['like', 'key', $this->key]);
         $query->andFilterWhere(['like', 'title', $this->title]);
         $query->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

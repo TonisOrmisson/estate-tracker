@@ -31,6 +31,8 @@ use kartik\switchinput\SwitchInput;
                     ]);?>
                 </div>
                 <div class="col-lg-6"><?= $form->field($model, 'key',['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?></div>
+                <div class="col-lg-6"><?= $form->field($model, 'name',['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?></div>
+                <div class="col-lg-6"><?= $form->field($model, 'rating',['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?></div>
             </div>
 
 

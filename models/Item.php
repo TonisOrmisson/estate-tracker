@@ -26,6 +26,8 @@ use yii\db\Expression;
  * @property integer $active
  * @property string $content
  * @property string $title
+ * @property string $name
+ * @property integer $rating
  * @property boolean $isWorking
  */
 class Item extends \yii\db\ActiveRecord
@@ -53,13 +55,14 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['provider_id', 'key', 'time_created','active'], 'required'],
+            [['provider_id', 'key', 'time_created','active','rating'], 'required'],
             [['provider_id','active'], 'integer'],
             [['time_created','time_changed'], 'safe'],
             [['m2'], 'number'],
             [['content'], 'string','max'=>10*1024],
             [['title'], 'string','max'=>1024],
-            [['key'], 'string', 'max' => 255],
+            [['key','name'], 'string', 'max' => 255],
+            [['rating'], 'number', 'max' => 10],
             ['key', 'unique', 'targetAttribute' => ['key', 'provider_id']],
             [['provider_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provider::className(), 'targetAttribute' => ['provider_id' => 'provider_id']],
         ];

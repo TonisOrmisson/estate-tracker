@@ -128,6 +128,7 @@ class Parse extends \yii\db\ActiveRecord
         }
         if($listing->m2 <> $item->m2 || $title <> $item->title ){
             $item->title = $title;
+            $item->content = $content;
             $item->m2= $listing->m2;
             $item->save();
 

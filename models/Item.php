@@ -29,6 +29,15 @@ use yii\db\Expression;
  */
 class Item extends \yii\db\ActiveRecord
 {
+    public function init()
+    {
+        parent::init();
+        if($this->isNewRecord){
+            // set default for new records
+            $this->provider_id =1;
+        }
+    }
+
     /**
      * @inheritdoc
      */

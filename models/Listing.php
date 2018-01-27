@@ -16,7 +16,6 @@ use yii\db\Expression;
  * @property string $time_created
  * @property double $price
  * @property double $m2
- * @property string $content
  *
  * @property boolean $isChange Whether there is a change vs last Listing of this item
  * @property Item $item
@@ -42,7 +41,6 @@ class Listing extends \yii\db\ActiveRecord
             [['parse_id', 'item_id','change','is_success'], 'integer'],
             [['time_created'], 'safe'],
             [['price','m2'], 'number'],
-            [['content'], 'string','max'=>10*1024],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'item_id']],
             [['parse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Parse::className(), 'targetAttribute' => ['parse_id' => 'parse_id']],
         ];
@@ -60,7 +58,6 @@ class Listing extends \yii\db\ActiveRecord
             'time_created' => Yii::t('app', 'Time created'),
             'price' => Yii::t('app', 'Item Price'),
             'm2' => Yii::t('app', 'Item floor area in m2'),
-            'content' => Yii::t('app', 'Item listing content text'),
             'change' => Yii::t('app', 'Was change detected?'),
             'is_success' => Yii::t('app', 'Was parse successful?'),
         ];

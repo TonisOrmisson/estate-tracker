@@ -19,6 +19,7 @@ class ItemSearch extends Item
         return [
             [['item_id', 'provider_id','active'], 'integer'],
             [['key', 'time_created'], 'safe'],
+            [[ 'content'], 'string'],
         ];
     }
 
@@ -62,6 +63,7 @@ class ItemSearch extends Item
             'provider_id' => $this->provider_id,
             'time_created' => $this->time_created,
             'active' => $this->active,
+            'content' => $this->content,
         ]);
         $query->orderBy(['item_id'=>SORT_DESC]);
 

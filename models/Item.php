@@ -24,6 +24,7 @@ use yii\db\Expression;
  * @property array $itemStats
  * @property double $m2
  * @property integer $active
+ * @property string $content
  * @property boolean $isWorking
  */
 class Item extends \yii\db\ActiveRecord
@@ -46,6 +47,7 @@ class Item extends \yii\db\ActiveRecord
             [['provider_id','active'], 'integer'],
             [['time_created','time_changed'], 'safe'],
             [['m2'], 'number'],
+            [['content'], 'string','max'=>10*1024],
             [['key'], 'string', 'max' => 255],
             ['key', 'unique', 'targetAttribute' => ['key', 'provider_id']],
             [['provider_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provider::className(), 'targetAttribute' => ['provider_id' => 'provider_id']],
@@ -64,6 +66,7 @@ class Item extends \yii\db\ActiveRecord
             'm2' => Yii::t('app', 'Item floor area in m2'),
             'time_created' => Yii::t('app', 'Time created'),
             'time_changed' => Yii::t('app', 'Time of last change in source'),
+            'content' => Yii::t('app', 'Item listing content text'),
         ];
     }
     /**

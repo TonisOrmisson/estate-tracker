@@ -21,7 +21,6 @@ class ListingSearch extends Listing
             [['listing_id', 'parse_id', 'item_id','change','is_success'], 'integer'],
             [['time_created'], 'safe'],
             [['price'], 'number'],
-            [[ 'content'], 'string'],
         ];
     }
 
@@ -76,7 +75,6 @@ class ListingSearch extends Listing
             'change' => $this->change,
             'is_success' => $this->is_success,
             'price' => $this->price,
-            'content' => $this->content,
         ]);
 
         return $dataProvider;

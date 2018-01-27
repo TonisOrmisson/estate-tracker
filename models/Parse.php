@@ -90,7 +90,7 @@ class Parse extends \yii\db\ActiveRecord
             $contentNode = $contentNodes->item(0);
             $content = $contentNode->ownerDocument->saveHTML($contentNode);
 
-        }catch (\ErrorException $exception){
+        }catch (\Exception $exception){
             $listing->save();
             Yii::error('Error parsing item ID: '.$item->primaryKey.' for '.$item->provider->name.':'.$item->key.' url:'.$item->url,__METHOD__);
             return;
@@ -106,7 +106,6 @@ class Parse extends \yii\db\ActiveRecord
         $m2Node = $doc->getElementById($locatorData['m2Id']);
         $m2 = doubleval(trim($m2Node->getAttribute('value')));
 
-        $listing->content = $content;
         $listing->price = $price;
         $listing->m2 = $m2;
 

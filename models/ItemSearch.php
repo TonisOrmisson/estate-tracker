@@ -18,7 +18,7 @@ class ItemSearch extends Item
     {
         return [
             [['item_id', 'provider_id','active','rating'], 'integer'],
-            [['key', 'time_created'], 'safe'],
+            [['key', 'time_created','time_changed'], 'safe'],
             [[ 'content','title','name'], 'string'],
         ];
     }
@@ -67,6 +67,7 @@ class ItemSearch extends Item
         ]);
         $query->orderBy(['item_id'=>SORT_DESC]);
 
+        $query->andFilterWhere(['>=','time_changed',$this->time_changed]);
         $query->andFilterWhere(['like', 'key', $this->key]);
         $query->andFilterWhere(['like', 'title', $this->title]);
         $query->andFilterWhere(['like', 'content', $this->content]);

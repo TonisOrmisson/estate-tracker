@@ -13,13 +13,29 @@ use app\models\Listing;
 class ListingSearch extends Listing
 {
     /**
+     * @var string $name
+     */
+    public $name;
+
+    /*
+     * @var string $title
+     */
+    public $title;
+
+    /*
+     * @var integer $rating
+     */
+    public $rating;
+
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['listing_id', 'parse_id', 'item_id','change','is_success'], 'integer'],
-            [['time_created'], 'safe'],
+            [['listing_id', 'parse_id', 'item_id','change','is_success','rating'], 'integer'],
+            [['time_created','name','title'], 'safe'],
             [['price'], 'number'],
         ];
     }
@@ -43,6 +59,7 @@ class ListingSearch extends Listing
     public function search($params)
     {
         $query = Listing::find();
+        $query->joinWith(['item']);
 
         // add conditions that should always apply here
 
@@ -75,7 +92,11 @@ class ListingSearch extends Listing
             'change' => $this->change,
             'is_success' => $this->is_success,
             'price' => $this->price,
+            'item.rating' => $this->rating,
         ]);
+
+        $query->andFilterWhere(['like', 'item.name', $this->name]);
+        $query->andFilterWhere(['like', 'item.title', $this->title]);
 
         return $dataProvider;
     }

@@ -19,13 +19,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
 
-            'listing_id',
-            'item_id',
             'time_created',
-            'change',
-            'is_success',
-            'price',
-            'm2',
+            ['attribute'=>'change','header'=>'change','options'=>['width'=>"1%"]],
+            ['attribute'=>'name','header'=>'name','value'=>'item.name'],
+            ['attribute'=>'rating','header'=>'rating','value'=>'item.rating','options'=>['width'=>"1%"]],
+            ['attribute'=>'title','header'=>'title','value'=>'item.title'],
+
+            ['attribute'=>'price','header'=>'price','options'=>['width'=>"1%"]],
+            ['attribute'=>'m2','header'=>'m2','options'=>['width'=>"1%"]],
             [
                 'format'=>'raw',
                 'header'=>Yii::t('app','Item'),
@@ -47,9 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);
                 }
             ],
-
-            ['class' => 'yii\grid\ActionColumn',
-            'template'=>'{view}'],
         ],
     ]); ?>
 </div>

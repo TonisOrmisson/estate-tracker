@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Item */
@@ -24,6 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a(Yii::t('app','Source'), Url::to($model->url),[
+            'target'=>'_blank',
+            'class'=>'btn btn-success'
+        ]);?>
     </p>
     <?= $this->render('_chart', [
         'model' => $model,
@@ -44,5 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'content:html',
         ],
     ]) ?>
+
+    <iframe src="<?=$model->url?>" width="100%" height="600">
+
+    </iframe>
 
 </div>

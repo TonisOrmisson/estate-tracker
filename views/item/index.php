@@ -23,13 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'item_id',
-            'provider_id',
-            'active',
-            'key',
-            'time_created',
+            ['attribute'=>'active','options'=>['width'=>"1%"]],
+            ['attribute'=>'key','header'=>'key','options'=>['width'=>"1%"]],
+            ['attribute'=>'time_changed','header'=>'change time','options'=>['width'=>"1%"]],
+            'name:ntext',
+            'rating:integer',
+            'title:ntext',
             [
                 'format'=>'raw',
                 'header'=>Yii::t('app','Source'),

@@ -1,0 +1,3 @@
+[submodule "usuario"]
+	path = yii2-usuario
+	url = https://github.com/TonisOrmisson/yii2-usuario.git

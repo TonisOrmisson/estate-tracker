@@ -102,12 +102,27 @@ class Parse extends \yii\db\ActiveRecord
         $patterns[] = '/\s+/';
         $patterns[0] = '/eur/';
         $price = intval(trim(preg_replace('/\s+/', '', $price)));
+        $m2Node = null;
+        $m2 = 0;
+        if (!empty($locatorData['m2Id'])) {
+            $m2Node = $doc->getElementById($locatorData['m2Id']);
+        }
 
-        $m2Node = $doc->getElementById($locatorData['m2Id']);
-        $m2 = doubleval(trim($m2Node->getAttribute('value')));
+        if (!empty($locatorData['m2Class'])) {
+            $m2Node = $finder->query("//*[contains(@class, '".$locatorData['m2Class']."')]")->item(0);
+        }
+
+        if (!empty($m2Node)) {
+            $m2 = trim($m2Node->textContent);
+            $m2 = str_replace(" EUR/m²", "", $m2);
+            $m2 = str_replace(" ", "", $m2);
+            $m2 = str_replace(",", ".", $m2);
+            $m2 = floatval($m2);
+        }
+
 
         $listing->price = $price;
-        $listing->m2 = $m2;
+        $listing->m2 = 0;
 
         // get the title
         $title = $finder->query("//*[contains(@class, '".$locatorData['titleClass']."')]")->item(0)->textContent;

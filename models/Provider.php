@@ -112,6 +112,9 @@ class Provider extends ActiveRecord
             'm2Id'=>[
                 'label' => Yii::t('app','Id containing m2 as value'),
             ],
+            'm2Class'=>[
+                'label' => Yii::t('app','Class containing m2 as value'),
+            ],
         ];
     }
     /**

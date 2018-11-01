@@ -8,11 +8,10 @@ services:
       - php
     volumes:
       - ./:/var/www/html/:ro
-      - ./nginx/conf/nginx.conf:/etc/nginx/conf/nginx.conf:ro
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./docker/nginx/conf/nginx.conf:/etc/nginx/conf/nginx.conf:ro
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
     ports:
-      - 80:80
-      - 443:443
+      - 8095:80
     depends_on:
       - db
       - php
@@ -41,14 +40,6 @@ services:
       - MYSQL_ROOT_PASSWORD=password
     ports:
       - 3306:3306
-  composer:
-    build: docker/composer
-    depends_on:
-      - php
-      - nginx
-    volumes:
-        - "./:/app"
-    command: install
 volumes:
   db-data:
     driver: local

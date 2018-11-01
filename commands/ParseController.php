@@ -13,9 +13,9 @@ class ParseController extends Controller
 {
     /**
      * This command echoes what you have entered as the message.
-     * @param string $message the message to be echoed.
+     * @param integer $limit
      */
-    public function actionIndex()
+    public function actionIndex($limit = 1)
     {
         /** @var Provider[] $providers */
         $providers = Provider::find()->all();
@@ -29,7 +29,7 @@ class ParseController extends Controller
 
             }
 
-            $items = $provider->getParsableItems();
+            $items = $provider->findParsableItems($limit);
             $i=0;
             if(!empty($items)){
                 foreach ($items as $item){

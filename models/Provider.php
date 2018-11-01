@@ -59,16 +59,7 @@ class Provider extends ActiveRecord
         ];
     }
 
-    /**
-     * @param integer $count
-     * @return Item[]
-     */
-    public function getParsableItems($count=1){
-        if($this->firstUpdatedItem){
-            return [$this->firstUpdatedItem];
-        }
-        return [];
-    }
+
 
     /**
      * Get the item from that provider that was updated first (most time passed)
@@ -93,6 +84,36 @@ class Provider extends ActiveRecord
         /** @var Item $model */
         $model=$query->one();
         return $model;
+    }
+
+    /**
+     * @param int $limit
+     * @return Item[]
+     */
+    public function findParsableItems($limit = 1) {
+        $query = $this->getParsableItems();
+        $query->limit($limit);
+        return $query->all();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getParsableItems() {
+        $subQuery = Listing::find()
+            ->select('time_created')
+            ->andWhere('item_id =`item`.`item_id`')
+            ->orderBy('time_created DESC')
+            ->limit(1)
+            ->createCommand()->rawSql;
+
+        $query = Item::find()
+            ->select(['item.*','('.$subQuery.') as time_last_listing'])
+            ->andWhere(['provider_id'=>$this->primaryKey])
+            ->andWhere(['active'=>1])
+            ->orderBy('time_last_listing')
+        ;
+        return $query;
     }
 
 

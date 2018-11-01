@@ -136,8 +136,9 @@ class Item extends \yii\db\ActiveRecord
             foreach ($data as $row) {
                 $date = new \DateTime($row['period']);
                 if($perM2){
-                    $price = $row['price'] / $this->m2;
-                }else{
+
+                    $price = $this->m2 > 0 ? $row['price'] / $this->m2 : 0;
+                } else {
                     $price = $row['price'];
                 }
                 $out[] =[($date->format('U') * 1000),(integer) $price];

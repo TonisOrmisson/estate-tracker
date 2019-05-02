@@ -19,7 +19,7 @@
     ],
     "prefer-stable":true,
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=7.2.0",
         "yiisoft/yii2": "~2.0.5",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
@@ -48,6 +48,12 @@
             "yii\\composer\\Installer::postCreateProject"
         ]
     },
+    "autoload": {
+        "psr-4": {
+            "app\\": "src"
+        }
+    },
+
     "extra": {
         "yii\\composer\\Installer::postCreateProject": {
             "setPermission": [

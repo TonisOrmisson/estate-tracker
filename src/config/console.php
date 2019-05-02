@@ -2,6 +2,7 @@
 
 $params = require(__DIR__ . '/params.php');
 $credentials = require(__DIR__ . '/credentials.php');
+$aliases = require(__DIR__ . '/aliases.php');
 
 $config = [
     'id' => 'basic-console',
@@ -10,6 +11,8 @@ $config = [
         'log',
         'app\bootstraps\AppBootstrap',
     ],
+    'aliases' => $aliases,
+
     'controllerNamespace' => 'app\commands',
     'components' => [
         'cache' => [

@@ -11,6 +11,7 @@ use yii\db\Expression;
  *
  * @property integer $item_id
  * @property integer $provider_id
+ * @property integer $item_type_id
  * @property string $key
  * @property string $time_created
  * @property string $time_changed
@@ -28,6 +29,7 @@ use yii\db\Expression;
  * @property string $name
  * @property integer $rating
  * @property boolean $isWorking
+ * @property ItemType $itemType
  */
 class Item extends \yii\db\ActiveRecord
 {
@@ -54,8 +56,8 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['provider_id', 'key', 'time_created','active','rating'], 'required'],
-            [['provider_id','active'], 'integer'],
+            [['provider_id', 'key', 'time_created','active','rating', 'item_type_id'], 'required'],
+            [['provider_id','active', 'item_type_id'], 'integer'],
             [['time_created','time_changed'], 'safe'],
             [['m2'], 'number'],
             [['content'], 'string','max'=>10*1024],
@@ -64,6 +66,7 @@ class Item extends \yii\db\ActiveRecord
             [['rating'], 'number', 'max' => 10],
             ['key', 'unique', 'targetAttribute' => ['key', 'provider_id']],
             [['provider_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provider::class, 'targetAttribute' => ['provider_id' => 'provider_id']],
+            [['item_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItemType::class, 'targetAttribute' => ['item_type_id' => 'item_type_id']],
         ];
     }
 
@@ -73,8 +76,9 @@ class Item extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'item_id' => Yii::t('app', 'Item ID'),
-            'provider_id' => Yii::t('app', 'Provider ID'),
+            'item_id' => Yii::t('app', 'ID'),
+            'provider_id' => Yii::t('app', 'Provider'),
+            'item_type_id' =>Yii::t('app', 'Item'),
             'key' => Yii::t('app', 'The item key/id in the provider to identify the item'),
             'm2' => Yii::t('app', 'Item floor area in m2'),
             'time_created' => Yii::t('app', 'Time created'),
@@ -230,5 +234,12 @@ class Item extends \yii\db\ActiveRecord
     public function getUserHasItems()
     {
         return $this->hasMany(UserHasItem::class, ['item_id' => 'item_id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItemType()
+    {
+        return $this->hasOne(ItemType::class, ['item_type_id' => 'item_type_id']);
     }
 }

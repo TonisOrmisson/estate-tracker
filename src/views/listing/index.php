@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute'=>'change','header'=>'change','options'=>['width'=>"1%"]],
             ['attribute'=>'name','header'=>'name','value'=>'item.name'],
             ['attribute'=>'rating','header'=>'rating','value'=>'item.rating','options'=>['width'=>"1%"]],
+            ['attribute'=>'itemType','header'=>'Type','value'=>'item.itemType.name','options'=>['width'=>"1%"]],
             ['attribute'=>'title','header'=>'title','value'=>'item.title'],
 
             ['attribute'=>'price','header'=>'price','options'=>['width'=>"1%"]],

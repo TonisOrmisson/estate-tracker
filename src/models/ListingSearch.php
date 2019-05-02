@@ -27,6 +27,9 @@ class ListingSearch extends Listing
      */
     public $rating;
 
+    /** @var integer */
+    public $itemType;
+
 
     /**
      * @inheritdoc
@@ -35,7 +38,7 @@ class ListingSearch extends Listing
     {
         return [
             [['listing_id', 'parse_id', 'item_id','change','is_success','rating'], 'integer'],
-            [['time_created','name','title'], 'safe'],
+            [['time_created','name','title', 'itemType'], 'safe'],
             [['price'], 'number'],
         ];
     }
@@ -93,6 +96,7 @@ class ListingSearch extends Listing
             'is_success' => $this->is_success,
             'price' => $this->price,
             'item.rating' => $this->rating,
+            'item.item_type_id' => $this->itemType,
         ]);
 
         $query->andFilterWhere(['like', 'item.name', $this->name]);

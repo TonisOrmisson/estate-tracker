@@ -24,8 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['attribute'=>'active','options'=>['width'=>"1%"]],
-            ['attribute'=>'key','header'=>'key','options'=>['width'=>"1%"]],
-            ['attribute'=>'time_changed','header'=>'change time','options'=>['width'=>"1%"]],
+            ['attribute'=>'item_type_id','value' => 'itemType.name', 'options'=>['width'=>"1%"]],
             'name:ntext',
             'rating:integer',
             'title:ntext',

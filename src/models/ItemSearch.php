@@ -17,7 +17,7 @@ class ItemSearch extends Item
     public function rules()
     {
         return [
-            [['item_id', 'provider_id','active','rating'], 'integer'],
+            [['item_id', 'provider_id','active','rating', 'item_type_id'], 'integer'],
             [['key', 'time_created','time_changed'], 'safe'],
             [[ 'content','title','name'], 'string'],
         ];
@@ -64,6 +64,7 @@ class ItemSearch extends Item
             'time_created' => $this->time_created,
             'active' => $this->active,
             'rating' => $this->rating,
+            'item_type_id' => $this->item_type_id
         ]);
         $query->orderBy(['item_id'=>SORT_DESC]);
 

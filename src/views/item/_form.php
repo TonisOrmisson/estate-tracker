@@ -19,11 +19,22 @@ use kartik\switchinput\SwitchInput;
         <div class="panel-heading"><?=Yii::t('app', 'Item form')?></div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-3">
                     <?= $form->field($model, 'provider_id')->widget(Select2::class, [
                         'data' => ArrayHelper::map(Provider::find()->all(),'provider_id','name'),
                         'options' => [
                             'placeholder' => Yii::t('app', 'Select provider'),
+                        ],
+                        'pluginOptions' => [
+                            'allowClear' => false,
+                        ]
+                    ]);?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $form->field($model, 'item_type_id')->widget(Select2::class, [
+                        'data' => ArrayHelper::map(\app\models\ItemType::find()->all(),'item_type_id','name'),
+                        'options' => [
+                            'placeholder' => Yii::t('app', 'Select type'),
                         ],
                         'pluginOptions' => [
                             'allowClear' => false,

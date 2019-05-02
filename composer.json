@@ -48,10 +48,10 @@
             "yii\\composer\\Installer::postCreateProject"
         ],
         "post-install-cmd":[
-            "php yii migrate/up  --interactive=0",
+            "php yii migrate/up  --interactive=0"
         ],
         "post-update-cmd":[
-            "php yii migrate/up  --interactive=0",
+            "php yii migrate/up  --interactive=0"
         ]
 
     },

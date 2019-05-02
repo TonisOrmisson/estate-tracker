@@ -63,7 +63,7 @@ class Item extends \yii\db\ActiveRecord
             [['key','name'], 'string', 'max' => 255],
             [['rating'], 'number', 'max' => 10],
             ['key', 'unique', 'targetAttribute' => ['key', 'provider_id']],
-            [['provider_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provider::className(), 'targetAttribute' => ['provider_id' => 'provider_id']],
+            [['provider_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provider::class, 'targetAttribute' => ['provider_id' => 'provider_id']],
         ];
     }
 
@@ -161,7 +161,7 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getProvider()
     {
-        return $this->hasOne(Provider::className(), ['provider_id' => 'provider_id']);
+        return $this->hasOne(Provider::class, ['provider_id' => 'provider_id']);
     }
 
     /**
@@ -206,7 +206,7 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getListings()
     {
-        return $this->hasMany(Listing::className(), ['item_id' => 'item_id']);
+        return $this->hasMany(Listing::class, ['item_id' => 'item_id']);
     }
 
     /**
@@ -229,6 +229,6 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getUserHasItems()
     {
-        return $this->hasMany(UserHasItem::className(), ['item_id' => 'item_id']);
+        return $this->hasMany(UserHasItem::class, ['item_id' => 'item_id']);
     }
 }

@@ -20,7 +20,7 @@ use kartik\switchinput\SwitchInput;
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-6">
-                    <?= $form->field($model, 'provider_id')->widget(Select2::className(), [
+                    <?= $form->field($model, 'provider_id')->widget(Select2::class, [
                         'data' => ArrayHelper::map(Provider::find()->all(),'provider_id','name'),
                         'options' => [
                             'placeholder' => Yii::t('app', 'Select provider'),
@@ -40,7 +40,7 @@ use kartik\switchinput\SwitchInput;
 
             <div class="row">
                 <div class="col-lg-6"><?= $form->field($model, 'm2')->textInput(['maxlength' => true]) ?></div>
-                <div class="col-lg-6"><?= $form->field($model, 'active')->widget(SwitchInput::classname(), []); ?></div>
+                <div class="col-lg-6"><?= $form->field($model, 'active')->widget(SwitchInput::class, []); ?></div>
             </div>
 
         </div>

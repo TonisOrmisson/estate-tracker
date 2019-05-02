@@ -41,8 +41,8 @@ class Listing extends \yii\db\ActiveRecord
             [['parse_id', 'item_id','change','is_success'], 'integer'],
             [['time_created'], 'safe'],
             [['price','m2'], 'number'],
-            [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'item_id']],
-            [['parse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Parse::className(), 'targetAttribute' => ['parse_id' => 'parse_id']],
+            [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::class, 'targetAttribute' => ['item_id' => 'item_id']],
+            [['parse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Parse::class, 'targetAttribute' => ['parse_id' => 'parse_id']],
         ];
     }
 
@@ -86,7 +86,7 @@ class Listing extends \yii\db\ActiveRecord
      */
     public function getItem()
     {
-        return $this->hasOne(Item::className(), ['item_id' => 'item_id']);
+        return $this->hasOne(Item::class, ['item_id' => 'item_id']);
     }
 
     /**
@@ -94,6 +94,6 @@ class Listing extends \yii\db\ActiveRecord
      */
     public function getParse()
     {
-        return $this->hasOne(Parse::className(), ['parse_id' => 'parse_id']);
+        return $this->hasOne(Parse::class, ['parse_id' => 'parse_id']);
     }
 }

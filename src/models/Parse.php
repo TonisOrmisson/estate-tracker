@@ -37,7 +37,7 @@ class Parse extends \yii\db\ActiveRecord
             [['provider_id', 'time_start'], 'required'],
             [['provider_id', 'items_parsed'], 'integer'],
             [['time_start', 'time_end'], 'safe'],
-            [['provider_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provider::className(), 'targetAttribute' => ['provider_id' => 'provider_id']],
+            [['provider_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provider::class, 'targetAttribute' => ['provider_id' => 'provider_id']],
         ];
     }
 
@@ -157,7 +157,7 @@ class Parse extends \yii\db\ActiveRecord
      */
     public function getListings()
     {
-        return $this->hasMany(Listing::className(), ['parse_id' => 'parse_id']);
+        return $this->hasMany(Listing::class, ['parse_id' => 'parse_id']);
     }
 
     /**
@@ -165,6 +165,6 @@ class Parse extends \yii\db\ActiveRecord
      */
     public function getProvider()
     {
-        return $this->hasOne(Provider::className(), ['provider_id' => 'provider_id']);
+        return $this->hasOne(Provider::class, ['provider_id' => 'provider_id']);
     }
 }

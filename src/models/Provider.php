@@ -143,7 +143,7 @@ class Provider extends ActiveRecord
      */
     public function getItems()
     {
-        return $this->hasMany(Item::className(), ['provider_id' => 'provider_id']);
+        return $this->hasMany(Item::class, ['provider_id' => 'provider_id']);
     }
 
     /**
@@ -151,6 +151,6 @@ class Provider extends ActiveRecord
      */
     public function getParses()
     {
-        return $this->hasMany(Parse::className(), ['provider_id' => 'provider_id']);
+        return $this->hasMany(Parse::class, ['provider_id' => 'provider_id']);
     }
 }

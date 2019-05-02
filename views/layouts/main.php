@@ -43,6 +43,7 @@ AppAsset::register($this);
             ['label' => 'User management', 'url' => ['/user/admin']],
             ['label' => 'Providers', 'url' => ['/provider']],
             ['label' => 'Items', 'url' => ['/item']],
+            ['label' => 'Item Types', 'url' => ['/item-type']],
             ['label' => 'Listings', 'url' => ['/listing']],
             ['label' => 'Parses', 'url' => ['/parse']],
             ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')',

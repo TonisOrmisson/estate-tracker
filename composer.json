@@ -46,7 +46,16 @@
     "scripts": {
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject"
+        ],
+        "post-install-cmd":[
+            "php yii migrate/up  --interactive=0",
+            "php yii user-strings"
+        ],
+        "post-update-cmd":[
+            "php yii migrate/up  --interactive=0",
+            "php yii user-strings"
         ]
+
     },
     "autoload": {
         "psr-4": {

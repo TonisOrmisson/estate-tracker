@@ -3,7 +3,7 @@ services:
   nginx:
     image: evild/alpine-nginx:1.9.15-openssl
     container_name: estatetrack_nginx
-    restart: always
+    restart: "no"
     links:
       - php
     volumes:
@@ -18,7 +18,7 @@ services:
   php:
     build: docker/php
     container_name: estatetrack_php
-    restart: always
+    restart: "no"
 
     volumes:
       - ./:/var/www/html
@@ -33,7 +33,7 @@ services:
   db:
     image: mariadb:latest
     container_name: estatetrack_mariadb
-    restart: always
+    restart: "no"
     volumes:
       - ./.db:/var/lib/mysql
     environment:

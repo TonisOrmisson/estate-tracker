@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Provider */
+/* @var $model app\models\ItemType */
 
-$this->title = Yii::t('app', 'Create Provider');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Providers'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Create Item Type');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Item Types'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="provider-create">
+<div class="item-type-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

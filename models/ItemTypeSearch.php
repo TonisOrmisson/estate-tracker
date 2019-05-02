@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Provider;
+use app\models\ItemType;
 
 /**
- * ProviderSearch represents the model behind the search form about `app\models\Provider`.
+ * ItemTypeSearch represents the model behind the search form of `app\models\ItemType`.
  */
-class ProviderSearch extends Provider
+class ItemTypeSearch extends ItemType
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ProviderSearch extends Provider
     public function rules()
     {
         return [
-            [['provider_id', 'active'], 'integer'],
-            [['name', 'url', 'locator_options', 'comment'], 'safe'],
+            [['item_type_id'], 'integer'],
+            [['name', 'comment'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ProviderSearch extends Provider
      */
     public function search($params)
     {
-        $query = Provider::find();
+        $query = ItemType::find();
 
         // add conditions that should always apply here
 
@@ -59,14 +59,10 @@ class ProviderSearch extends Provider
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'provider_id' => $this->provider_id,
-            'active' => $this->active,
+            'item_type_id' => $this->item_type_id,
         ]);
-        $query->orderBy(['provider_id'=>SORT_DESC]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'locator_options', $this->locator_options])
             ->andFilterWhere(['like', 'comment', $this->comment]);
 
         return $dataProvider;

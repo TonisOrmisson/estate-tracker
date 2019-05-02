@@ -3,7 +3,6 @@
 namespace app\models;
 
 use andmemasin\helpers\Replacer;
-use function Sodium\library_version_minor;
 use Yii;
 use yii\db\Expression;
 

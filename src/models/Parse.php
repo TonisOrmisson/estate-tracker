@@ -111,9 +111,11 @@ class Parse extends \yii\db\ActiveRecord
         if (!empty($m2Node)) {
             Yii::info("looking for m2node found for $item->primaryKey: ", __METHOD__);
             $m2 = trim($m2Node->textContent);
-            Yii::info("initial m2node value for $item->primaryKey: " . $m2, __METHOD__);
-            $m2 = str_replace(" ", "", $m2);
+            Yii::info("initial m2node value for $item->primaryKey: " . serialize($m2), __METHOD__);
+            $m2 = str_replace(' ', "", $m2);
+            Yii::info("spaces removed m2node value for $item->primaryKey: " . $m2, __METHOD__);
             $m2 = str_replace(",", ".", $m2);
+            Yii::info("commas fixed m2node value for $item->primaryKey: " . $m2, __METHOD__);
             preg_match('/([0-9]+\.?[0-9].)/', $m2, $matches);
             Yii::info("extracted m2 value for $item->primaryKey: " . serialize($matches), __METHOD__);
             $m2 = $matches[0];
@@ -126,7 +128,10 @@ class Parse extends \yii\db\ActiveRecord
         $listing->m2 = 0;
 
         // get the title
+
         $title = $finder->query("//*[contains(@class, '".$locatorData['titleClass']."')]")->item(0)->textContent;
+        Yii::info("initial titleNode for $item->primaryKey: " . $title, __METHOD__);
+
 
 
 

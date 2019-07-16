@@ -77,7 +77,7 @@ class ItemController extends Controller
     {
         $model = new Item();
         $model->active = 1;
-        $model->time_created = DateHelper::getDatetime6();
+        $model->time_created = (new DateHelper)->getDatetime6();
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);

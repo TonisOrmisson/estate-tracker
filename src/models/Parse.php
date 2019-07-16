@@ -95,23 +95,28 @@ class Parse extends \yii\db\ActiveRecord
         $patterns[] = '/\s+/';
         $patterns[0] = '/eur/';
         $price = intval(trim(preg_replace('/\s+/', '', $price)));
-        Yii::info("Extracted prixe for $item->primaryKey: " . $price, __METHOD__);
+        Yii::info("Extracted price for $item->primaryKey: " . $price, __METHOD__);
         $m2Node = null;
         $m2 = 0;
         if (!empty($locatorData['m2Id'])) {
+            Yii::info("looking for m2ID element for $item->primaryKey: ", __METHOD__);
             $m2Node = $doc->getElementById($locatorData['m2Id']);
         }
 
         if (!empty($locatorData['m2Class'])) {
+            Yii::info("looking for m2CLASS element for $item->primaryKey: ", __METHOD__);
             $m2Node = $finder->query("//*[contains(@class, '".$locatorData['m2Class']."')]")->item(0);
         }
 
         if (!empty($m2Node)) {
+            Yii::info("looking for m2node found for $item->primaryKey: ", __METHOD__);
             $m2 = trim($m2Node->textContent);
+            Yii::info("initial m2node value for $item->primaryKey: " . $m2, __METHOD__);
             $m2 = str_replace(" EUR/m²", "", $m2);
             $m2 = str_replace(" ", "", $m2);
             $m2 = str_replace(",", ".", $m2);
             $m2 = floatval($m2);
+            Yii::info("extracted m2 value for $item->primaryKey: " . $m2, __METHOD__);
         }
 
 

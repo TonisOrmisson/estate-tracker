@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use andmemasin\jsonform\JsonForm;
+use tonisormisson\jsonform\JsonForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Provider */

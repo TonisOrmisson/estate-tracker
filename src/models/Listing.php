@@ -37,7 +37,7 @@ class Listing extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parse_id', 'item_id', 'time_created'], 'required'],
+            [['item_id', 'time_created'], 'required'],
             [['parse_id', 'item_id','change','is_success'], 'integer'],
             [['time_created'], 'safe'],
             [['price','m2'], 'number'],

@@ -23,8 +23,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            [
+                'attribute'=>'provider_id',
+                'value' => 'provider.name',
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Provider::find()->all(), 'provider_id', 'name'),
+                'options'=>['width'=>"1%"],
+            ],
             ['attribute'=>'active','options'=>['width'=>"1%"]],
-            ['attribute'=>'item_type_id','value' => 'itemType.name', 'options'=>['width'=>"1%"]],
+            [
+                'attribute'=>'item_type_id',
+                'value' => 'itemType.name',
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\ItemType::find()->all(), 'item_type_id', 'name'),
+                'options'=>['width'=>"1%"],
+            ],
             ['attribute'=>'key', 'header'=>'key', 'options'=>['width'=>"1%"]],
             ['attribute'=>'rating', 'options'=>['width'=>"1%"]],
             'name:ntext',

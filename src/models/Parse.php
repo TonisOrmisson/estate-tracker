@@ -112,9 +112,8 @@ class Parse extends \yii\db\ActiveRecord
             Yii::info("looking for m2node found for $item->primaryKey: ", __METHOD__);
             $m2 = trim($m2Node->textContent);
             Yii::info("initial m2node value for $item->primaryKey: " . $m2, __METHOD__);
-            $m2 = str_replace(" EUR/m²", "", $m2);
-            $m2 = str_replace(" ", "", $m2);
-            $m2 = str_replace(",", ".", $m2);
+            preg_match_all('/\d+/', $m2, $matches);
+            $m2 = $matches[0];
             $m2 = floatval($m2);
             Yii::info("extracted m2 value for $item->primaryKey: " . $m2, __METHOD__);
         }

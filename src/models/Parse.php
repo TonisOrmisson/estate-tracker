@@ -126,6 +126,10 @@ class Parse extends \yii\db\ActiveRecord
         Yii::info("initial titleNode for $item->primaryKey: " . $title, __METHOD__);
 
 
+        $item->m2 = $listing->m2;
+        $item->title = $title;
+        $item->content = $content;
+        $item->save();
 
 
         if($listing->isChange){
@@ -140,13 +144,8 @@ class Parse extends \yii\db\ActiveRecord
         }else{
             $item->save();
         }
-        if($listing->m2 <> $item->m2 || $title <> $item->title ){
-            $item->title = $title;
-            $item->content = $content;
-            $item->m2= $listing->m2;
-            $item->save();
 
-        }
+
 
     }
 

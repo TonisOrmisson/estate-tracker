@@ -91,6 +91,7 @@ class Parse extends \yii\db\ActiveRecord
 
         $priceNodes = $finder->query("//*[contains(@class, '".$locatorData['priceClass']."')]");
         $price = strtolower($priceNodes->item(0)->textContent);
+        $price = $this->parseNumber($price);
         Yii::info("Found price item for $item->primaryKey: " . serialize($price), __METHOD__);
         $patterns[] = '/\s+/';
         $patterns[0] = '/eur/';
@@ -108,24 +109,16 @@ class Parse extends \yii\db\ActiveRecord
             $m2Node = $finder->query("//*[contains(@class, '".$locatorData['m2Class']."')]")->item(0);
         }
 
+        $listing->price = intval($price);
+        $listing->m2 = 0;
         if (!empty($m2Node)) {
             Yii::info("looking for m2node found for $item->primaryKey: ", __METHOD__);
-            $m2 = trim($m2Node->textContent);
-            Yii::info("initial m2node value for $item->primaryKey: " . serialize($m2), __METHOD__);
-            $m2 = str_replace(' ', "", $m2);
-            Yii::info("spaces removed m2node value for $item->primaryKey: " . $m2, __METHOD__);
-            $m2 = str_replace(",", ".", $m2);
-            Yii::info("commas fixed m2node value for $item->primaryKey: " . $m2, __METHOD__);
-            preg_match('/([0-9]+\.?[0-9].)/', $m2, $matches);
-            Yii::info("extracted m2 value for $item->primaryKey: " . serialize($matches), __METHOD__);
-            $m2 = $matches[0];
-            $m2 = floatval($m2);
+            $m2 = $this->parseNumber($m2Node->textContent);
             Yii::info("extracted m2 value for $item->primaryKey: " . $m2, __METHOD__);
+            $listing->m2 = $listing->price / $m2;
         }
 
 
-        $listing->price = $price;
-        $listing->m2 = 0;
 
         // get the title
 
@@ -136,13 +129,13 @@ class Parse extends \yii\db\ActiveRecord
 
 
         if($listing->isChange){
-            $listing->change =  true;
+            $listing->change =  1;
             $item->time_changed = (new DateHelper)->getDatetime6();
         }
         $listing->is_success = 1;
 
         if(!$listing->save()){
-            Yii::error("Error saving listing",__METHOD__);
+            Yii::error("Error saving listing: " . serialize($listing->errors),__METHOD__);
             var_dump($listing->errors);
         }else{
             $item->save();
@@ -155,6 +148,19 @@ class Parse extends \yii\db\ActiveRecord
 
         }
 
+    }
+
+    /**
+     * @param string $initial
+     * @return float
+     */
+    private function parseNumber($initial) {
+        $value = trim($initial);
+        $value = str_replace(' ', "", $value);
+        $value = str_replace(",", ".", $value);
+        preg_match('/([0-9]+\.?[0-9].)/', $value, $matches);
+        $value = $matches[0];
+        return floatval($value);
     }
 
 

@@ -21,11 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'time_created',
             ['attribute'=>'change','header'=>'change','options'=>['width'=>"1%"]],
-            ['attribute'=>'name','header'=>'name','value'=>'item.name'],
-            ['attribute'=>'rating','header'=>'rating','value'=>'item.rating','options'=>['width'=>"1%"]],
-            ['attribute'=>'itemType','header'=>'Type','value'=>'item.itemType.name','options'=>['width'=>"1%"]],
+            ['attribute'=>'name','header'=>'name','value'=>'item.key'],
             ['attribute'=>'title','header'=>'title','value'=>'item.title'],
-
             ['attribute'=>'price','header'=>'price','options'=>['width'=>"1%"]],
             ['attribute'=>'m2','header'=>'m2','options'=>['width'=>"1%"]],
             [

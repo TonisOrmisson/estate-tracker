@@ -45,4 +45,14 @@ class ParseController extends Controller
 
         }
     }
+
+    public function actionItem($id) {
+        $item = Item::findOne($id);
+        if (empty($item)) {
+            $this->stdout("Item $id not found ...\n", Console::BOLD, Console::FG_RED);
+        }
+        $this->stdout("Parsing item $id ...\n");
+        $parse = new Parse();
+        $result = $parse->parse($item);
+    }
 }

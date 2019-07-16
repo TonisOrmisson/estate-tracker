@@ -83,7 +83,7 @@ class Parse extends \yii\db\ActiveRecord
         $doc = new \DOMDocument();
         $doc->loadHTML('<?xml encoding="UTF-8">' .$html);
         $finder = new \DomXPath($doc);
-        $locatorData = Json::decode($this->provider->locator_options);
+        $locatorData = Json::decode($item->provider->locator_options);
 
         try{
             $contentNodes = $finder->query("//*[contains(@class, '".$locatorData['contentClass']."')]");

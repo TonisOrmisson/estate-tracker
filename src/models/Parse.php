@@ -130,6 +130,9 @@ class Parse extends \yii\db\ActiveRecord
         $item->title = $title;
         $item->content = $content;
         $item->save();
+        if(!$item->save()) {
+            Yii::error("Error saving item: " . serialize($item->errors), __METHOD__);
+        }
 
 
         if($listing->isChange){

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use andmemasin\helpers\DateHelper;
+use app\factories\ListingFactory;
 use Yii;
 use yii\helpers\Json;
 
@@ -60,23 +61,13 @@ class Parse extends \yii\db\ActiveRecord
      */
     public function parse($item)
     {
+        Yii::info("Parsing item $item->primaryKey", __METHOD__);
 
-        $listing = new Listing();
-        $listing->parse_id = $this->primaryKey;
-        $listing->item_id = $item->primaryKey;
-        $listing->time_created = DateHelper::getDatetime6();
-        $listing->is_success = 0;
-
-        // disable if not working
-        if(!$item->isWorking){
-            $item->active = 0;
-            $item->time_changed = DateHelper::getDatetime6();
-            $listing->save();
-            $item->save();
-            return;
+        $listing = (new ListingFactory())->makeForItem($item);
+        if (empty($listing)) {
+            Yii::info("Item $item->primaryKey disabled, skipping", __METHOD__);
+            return null;
         }
-
-        $listing->save();
 
         $html = Response::getResponse($item->url);
         libxml_use_internal_errors(true);
@@ -89,6 +80,7 @@ class Parse extends \yii\db\ActiveRecord
             $contentNodes = $finder->query("//*[contains(@class, '".$locatorData['contentClass']."')]");
             $contentNode = $contentNodes->item(0);
             $content = $contentNode->ownerDocument->saveHTML($contentNode);
+            Yii::info("found content for $item->primaryKey", __METHOD__);
 
         }catch (\Exception $exception){
             $listing->save();
@@ -99,9 +91,11 @@ class Parse extends \yii\db\ActiveRecord
 
         $priceNodes = $finder->query("//*[contains(@class, '".$locatorData['priceClass']."')]");
         $price = strtolower($priceNodes->item(0)->textContent);
+        Yii::info("Found price item for $item->primaryKey: " . serialize($price), __METHOD__);
         $patterns[] = '/\s+/';
         $patterns[0] = '/eur/';
         $price = intval(trim(preg_replace('/\s+/', '', $price)));
+        Yii::info("Extracted prixe for $item->primaryKey: " . $price, __METHOD__);
         $m2Node = null;
         $m2 = 0;
         if (!empty($locatorData['m2Id'])) {
@@ -131,7 +125,7 @@ class Parse extends \yii\db\ActiveRecord
 
         if($listing->isChange){
             $listing->change =  true;
-            $item->time_changed = DateHelper::getDatetime6();
+            $item->time_changed = (new DateHelper)->getDatetime6();
         }
         $listing->is_success = 1;
 

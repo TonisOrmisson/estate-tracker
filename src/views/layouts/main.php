@@ -60,21 +60,13 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div class="container-fuid">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= $content ?>
     </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; Andmemasin 2017- <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::$app->timeZone; ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>

@@ -25,7 +25,6 @@
         "yiisoft/yii2": "~2.0.5",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "dektrium/yii2-user":"0.9.*",
         "andmemasin/yii2-helpers": "dev-master",
         "tonisormisson/yii2-json-form": "^1.2.7",
         "kartik-v/yii2-widget-select2": "@dev",

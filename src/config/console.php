@@ -1,5 +1,7 @@
 <?php
 
+use Da\User\Module;
+
 $params = require(__DIR__ . '/params.php');
 $credentials = require(__DIR__ . '/credentials.php');
 $aliases = require(__DIR__ . '/aliases.php');
@@ -21,15 +23,27 @@ $config = [
         'log' => $credentials['log'],
         'db' => $credentials['db'],
         'mailer' => $credentials['mailer'],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
+
     ],
     'params' => $params,
-    /*
     'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => [
+                '@app/migrations',
+                '@yii/rbac/migrations', // Just in case you forgot to run it on console (see next note)
+            ],
+            'migrationNamespaces' => [
+                'Da\User\Migration',
+            ],
         ],
     ],
-    */
+    'modules' => [
+        'user' =>  Da\User\Module::class,
+    ]
 ];
 
 if (YII_ENV_DEV) {

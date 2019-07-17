@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   nginx:
     user: "${UID}:${GID}"
@@ -47,3 +47,10 @@ services:
 volumes:
   db-data:
     driver: local
+
+networks:
+  default:
+    external:
+      name: dev1
+  dev1:
+    external: true

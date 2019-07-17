@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => \yii\helpers\ArrayHelper::map(\app\models\Provider::find()->all(), 'provider_id', 'name'),
                 'options'=>['width'=>"1%"],
             ],
+            ['attribute'=>'time_created',],
             ['attribute'=>'active','options'=>['width'=>"1%"]],
             [
                 'attribute'=>'item_type_id',

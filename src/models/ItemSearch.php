@@ -47,6 +47,7 @@ class ItemSearch extends Item
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['time_created'=>SORT_DESC]]
         ]);
 
         $this->load($params);
@@ -66,7 +67,6 @@ class ItemSearch extends Item
             'rating' => $this->rating,
             'item_type_id' => $this->item_type_id
         ]);
-        $query->orderBy(['item_id'=>SORT_DESC]);
 
         $query->andFilterWhere(['>=','time_changed',$this->time_changed]);
         $query->andFilterWhere(['like', 'key', $this->key]);

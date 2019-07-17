@@ -81,10 +81,9 @@ class Parse extends \yii\db\ActiveRecord
             $contentNode = $contentNodes->item(0);
             $content = $contentNode->ownerDocument->saveHTML($contentNode);
             Yii::info("found content for $item->primaryKey", __METHOD__);
-
         }catch (\Exception $exception){
             $listing->save();
-            Yii::error('Error parsing item ID: '.$item->primaryKey.' for '.$item->provider->name.':'.$item->key.' url:'.$item->url,__METHOD__);
+            Yii::warning('Error parsing item ID: '.$item->primaryKey.' for '.$item->provider->name.':'.$item->key.' url:'.$item->url,__METHOD__);
             return;
         }
 
@@ -96,7 +95,6 @@ class Parse extends \yii\db\ActiveRecord
         Yii::info("Found price item for $item->primaryKey: " . serialize($price), __METHOD__);
         Yii::info("Extracted price for $item->primaryKey: " . $price, __METHOD__);
         $m2Node = null;
-        $m2 = 0;
         if (!empty($locatorData['m2Id'])) {
             Yii::info("looking for m2ID element for $item->primaryKey: ", __METHOD__);
             $m2Node = $doc->getElementById($locatorData['m2Id']);

@@ -64,6 +64,9 @@
     },
 
     "extra": {
+        "branch-alias": {
+            "dev-master": "1.2.0-dev"
+        },
         "yii\\composer\\Installer::postCreateProject": {
             "setPermission": [
                 {

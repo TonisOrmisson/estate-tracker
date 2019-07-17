@@ -51,8 +51,4 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    <iframe src="<?=$model->url?>" width="100%" height="600">
-
-    </iframe>
-
 </div>

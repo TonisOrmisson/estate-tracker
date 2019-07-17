@@ -13,7 +13,12 @@ use yii\helpers\Url;
         <div class="box-body">
             <?= GridView::widget([
                 'dataProvider' => new \yii\data\ActiveDataProvider([
-                    'query' => \app\models\Listing::find()->where(['item_id' => $model->primaryKey, 'change' => 1])
+                    'query' => \app\models\Listing::find()->where(['item_id' => $model->primaryKey, 'change' => 1]),
+                    'sort' => [
+                        'defaultOrder' => [
+                            'listing_id' => SORT_DESC,
+                        ]
+                    ],
                 ]),
                 'columns' => [
 
@@ -31,7 +36,12 @@ use yii\helpers\Url;
         <div class="box-body">
             <?= GridView::widget([
                 'dataProvider' => new \yii\data\ActiveDataProvider([
-                        'query' => \app\models\Listing::find()->where(['item_id' => $model->primaryKey])
+                    'query' => \app\models\Listing::find()->where(['item_id' => $model->primaryKey]),
+                    'sort' => [
+                        'defaultOrder' => [
+                            'listing_id' => SORT_DESC,
+                        ]
+                    ],
                 ]),
             'rowOptions' => function ($model, $key, $index, $grid) {
                 /** @var \app\models\Listing $model */

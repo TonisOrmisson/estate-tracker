@@ -113,7 +113,7 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getIsWorking()
     {
-        $checkCount = 5;
+        $checkCount = 100;
         $listings = $this->getLastListings($checkCount);
         if($listings){
             $countFailed = 0;

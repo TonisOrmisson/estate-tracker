@@ -84,7 +84,7 @@ class Parse extends \yii\db\ActiveRecord
         }catch (\Exception $exception){
             $listing->save();
             Yii::warning('Error parsing item ID: '.$item->primaryKey.' for '.$item->provider->name.':'.$item->key.' url:'.$item->url,__METHOD__);
-            return;
+            //return;
         }
 
 
@@ -142,9 +142,15 @@ class Parse extends \yii\db\ActiveRecord
         if(!$listing->save()){
             Yii::error("Error saving listing: " . serialize($listing->errors),__METHOD__);
             var_dump($listing->errors);
-        }else{
-            $item->save();
         }
+
+        Yii::info("Saved listing for $item->primaryKey: " . $title, __METHOD__);
+
+        if(!$item->save()){
+            Yii::error("Error saving item: " . serialize($item->errors),__METHOD__);
+        }
+
+        Yii::info("Saved item for $item->primaryKey: " . $title, __METHOD__);
 
 
 

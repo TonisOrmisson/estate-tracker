@@ -91,11 +91,9 @@ class Parse extends \yii\db\ActiveRecord
 
         $priceNodes = $finder->query("//*[contains(@class, '".$locatorData['priceClass']."')]");
         $price = strtolower($priceNodes->item(0)->textContent);
+        Yii::info("Found initial price item for $item->primaryKey: " . serialize($price), __METHOD__);
         $price = $this->parseNumber($price);
         Yii::info("Found price item for $item->primaryKey: " . serialize($price), __METHOD__);
-        $patterns[] = '/\s+/';
-        $patterns[0] = '/eur/';
-        $price = intval(trim(preg_replace('/\s+/', '', $price)));
         Yii::info("Extracted price for $item->primaryKey: " . $price, __METHOD__);
         $m2Node = null;
         $m2 = 0;
@@ -122,7 +120,7 @@ class Parse extends \yii\db\ActiveRecord
 
         // get the title
 
-        $title = $finder->query("//*[contains(@class, '".$locatorData['titleClass']."')]")->item(0)->textContent;
+        $title = trim($finder->query("//*[contains(@class, '".$locatorData['titleClass']."')]")->item(0)->textContent);
         Yii::info("initial titleNode for $item->primaryKey: " . $title, __METHOD__);
 
 
@@ -158,6 +156,7 @@ class Parse extends \yii\db\ActiveRecord
      */
     private function parseNumber($initial) {
         $value = trim($initial);
+        $value = str_replace(" ", "", $value);
         $value = str_replace(' ', "", $value);
         $value = str_replace(",", ".", $value);
         preg_match('/([0-9]+\.?[0-9].)/', $value, $matches);

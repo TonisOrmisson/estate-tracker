@@ -144,7 +144,7 @@ class Parse extends \yii\db\ActiveRecord
             var_dump($listing->errors);
         }
 
-        Yii::info("Saved listing for $item->primaryKey: " . $title, __METHOD__);
+        Yii::info("Saved listing for $item->primaryKey: " . serialize($listing->attributes), __METHOD__);
 
         if(!$item->save()){
             Yii::error("Error saving item: " . serialize($item->errors),__METHOD__);

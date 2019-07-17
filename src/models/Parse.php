@@ -123,7 +123,9 @@ class Parse extends \yii\db\ActiveRecord
 
 
         $item->m2 = $listing->m2;
-        $item->title = $title;
+
+        empty($title) ? null : $item->title = $title;
+
         //$item->content = $content;
         $item->save();
         if(!$item->save()) {

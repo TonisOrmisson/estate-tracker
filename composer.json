@@ -30,7 +30,8 @@
         "tonisormisson/yii2-json-form": "^1.2.7",
         "kartik-v/yii2-widget-select2": "@dev",
         "kartik-v/yii2-widget-switchinput": "*",
-        "miloschuman/yii2-highcharts-widget": "^5.0"
+        "miloschuman/yii2-highcharts-widget": "^5.0",
+        "dmstr/yii2-adminlte-asset": "^2.1"
 
 
     },

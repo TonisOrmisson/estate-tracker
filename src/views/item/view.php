@@ -13,42 +13,60 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="item-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->item_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app','Source'), Url::to($model->url),[
+            'target'=>'_blank',
+            'class'=>'btn btn-success'
+        ]);?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->item_id], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-danger pull-right',
             'data' => [
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a(Yii::t('app','Source'), Url::to($model->url),[
-            'target'=>'_blank',
-            'class'=>'btn btn-success'
-        ]);?>
     </p>
-    <?= $this->render('_chart', [
-        'model' => $model,
-    ]) ?>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'provider.name',
-            'itemType.name',
-            'item_id',
-            'name',
-            'rating',
-            'title',
-            'provider_id',
-            'key',
-            'm2',
-            'time_created',
-            'time_changed',
-        ],
-    ]) ?>
+    <div class="box box-default">
+        <div class="box-body">
+
+            <?= $this->render('_chart', [
+                'model' => $model,
+            ]) ?>
+        </div>
+    </div>
+
+    <div class="box box-default">
+        <div class="box-body">
+
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'provider.name',
+                    'itemType.name',
+                    'item_id',
+                    'name',
+                    'rating',
+                    'title',
+                    'provider_id',
+                    'key',
+                    'm2',
+                    'time_created',
+                    'time_changed',
+                ],
+            ]) ?>
+
+        </div>
+    </div>
+
+
+    <div class="box box-default">
+        <div class="box-header">Listings</div>
+        <div class="box-body">
+            dfgdf
+        </div>
+    </div>
 
 </div>
+

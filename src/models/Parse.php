@@ -111,7 +111,7 @@ class Parse extends \yii\db\ActiveRecord
             Yii::info("looking for m2node found for $item->primaryKey: ", __METHOD__);
             $m2 = $this->parseNumber($m2Node->textContent);
             Yii::info("extracted m2 value for $item->primaryKey: " . $m2, __METHOD__);
-            $listing->m2 = $listing->price / $m2;
+            empty($m2) ? null : $listing->m2 = $listing->price / $m2;
         }
 
 

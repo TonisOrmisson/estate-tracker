@@ -61,10 +61,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 
-    <div class="box box-default">
-        <div class="box-header">Listings</div>
-        <div class="box-body">
-            dfgdf
+
+            <?= $this->render('_listings', ['model' => $model])?>
         </div>
     </div>
 

@@ -102,9 +102,10 @@ class Item extends \yii\db\ActiveRecord
 
         $query = $this->getListings()
             ->select([
-                new Expression('DATE_FORMAT(time_created,"%Y-%m-%d %H:%i:00") AS period'),
-                'price'
+                new Expression('DATE_FORMAT(time_created,"%Y-%m-%d %H:00:00") AS period'),
+                new Expression('MIN(price) as price'),
             ]);
+        $query->groupBy('period');
         return $query->createCommand()->queryAll();
     }
 

@@ -2,6 +2,7 @@
 .*
 !.gitignore
 !.bowerrc
+env.php
 
 # composer vendor dir
 /vendor

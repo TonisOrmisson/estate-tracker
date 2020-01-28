@@ -1,8 +1,5 @@
 {
     "name": "tonisormisson/estate-tracker",
-    "description": "Yii 2 Basic Project Template implementing Yii2-user",
-    "keywords": ["yii2", "framework", "basic", "project template"],
-    "homepage": "http://www.yiiframework.com/",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",

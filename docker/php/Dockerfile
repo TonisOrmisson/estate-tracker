@@ -1,4 +1,4 @@
-FROM hermsi/alpine-fpm-php
+FROM hermsi/alpine-fpm-php:stable
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 

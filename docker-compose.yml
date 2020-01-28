@@ -52,5 +52,3 @@ networks:
   default:
     external:
       name: dev1
-  dev1:
-    external: true

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use Da\User\Model;
 
 /**
  * This is the model class for table "user_has_item".
@@ -15,7 +16,7 @@ use Yii;
  * @property integer $active
  *
  * @property Item $item
- * @property User $user
+ * @property Model\User $user
  */
 class UserHasItem extends \yii\db\ActiveRecord
 {

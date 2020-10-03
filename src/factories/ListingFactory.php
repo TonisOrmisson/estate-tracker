@@ -34,7 +34,11 @@ class ListingFactory
         }
         $listing->save();
 
-        Listing::updateAll(['is_last' => 0], ['item_id' => $item->primaryKey, ['!=', 'listing_id', $listing->primaryKey]]);
+        Listing::updateAll(['is_last' => 0], [
+            'and',
+            ['item_id' => $item->primaryKey],
+            ['!=', 'listing_id', $listing->primaryKey]
+        ]);
         return $listing;
     }
 

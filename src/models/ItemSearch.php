@@ -43,7 +43,6 @@ class ItemSearch extends Item
     {
         $query = Item::find();
 
-        $query->joinWith(['lastListing']);
 
         // add conditions that should always apply here
 

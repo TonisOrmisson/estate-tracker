@@ -28,7 +28,8 @@
         "kartik-v/yii2-widget-switchinput": "*",
         "miloschuman/yii2-highcharts-widget": "^5.0",
         "dmstr/yii2-adminlte-asset": "^2.1",
-        "2amigos/yii2-usuario":"^1.5.0"
+        "2amigos/yii2-usuario":"^1.5.0",
+        "kartik-v/yii2-grid": "^3.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

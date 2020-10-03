@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -21,14 +21,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
-                'columns' => [
+                'columns' =>[
+
+                    /*
                     [
                         'attribute'=>'provider_id',
                         'value' => 'provider.name',
                         'filter' => \yii\helpers\ArrayHelper::map(\app\models\Provider::find()->all(), 'provider_id', 'name'),
                         'options'=>['width'=>"1%"],
                     ],
-                    ['attribute'=>'lastListing.price',],
+                     */
                     ['attribute'=>'active','options'=>['width'=>"1%"]],
                     [
                         'attribute'=>'item_type_id',
@@ -40,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['attribute'=>'rating', 'options'=>['width'=>"1%"]],
                     'name:ntext',
                     'title:ntext',
+                    'lastListing.price:integer',
                     [
                         'format'=>'raw',
                         'header'=>Yii::t('app','Source'),

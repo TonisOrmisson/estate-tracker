@@ -42,6 +42,9 @@ $config = [
             'administrators' => ['admin'],
             'enableRegistration' => false,
         ],
+        'gridview' => [
+            'class' => '\kartik\grid\Module'
+        ],
     ],
     'params' => $params,
 ];

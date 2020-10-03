@@ -16,7 +16,7 @@
     ],
     "prefer-stable":true,
     "require": {
-        "php": ">=7.2.0",
+        "php": ">=7.3.0",
         "ext-libxml": "*",
 
         "yiisoft/yii2": "~2.0.5",
@@ -29,7 +29,8 @@
         "miloschuman/yii2-highcharts-widget": "^5.0",
         "dmstr/yii2-adminlte-asset": "^2.1",
         "2amigos/yii2-usuario":"^1.5.0",
-        "kartik-v/yii2-grid": "^3.3"
+        "kartik-v/yii2-grid": "^3.3",
+        "tonisormisson/yii2-version-tag": "^1.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -65,7 +66,7 @@
 
     "extra": {
         "branch-alias": {
-            "dev-master": "1.2.0-dev"
+            "dev-master": "1.3.0-dev"
         },
         "yii\\composer\\Installer::postCreateProject": {
             "setPermission": [

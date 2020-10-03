@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-
 ?>
 <aside class="main-sidebar">
 
@@ -37,5 +36,6 @@ use yii\helpers\Html;
         ) ?>
 
     </section>
+    <?= \tonisormisson\versiontag\VersionTag::widget(['tooltipLocation' => 'right'])?>
 
 </aside>

@@ -22,11 +22,11 @@ class ParseController extends Controller
         foreach ($providers as $provider){
             $this->stdout($provider->name." ...\n", Console::BOLD);
             $parse = new Parse(['provider_id'=>$provider->primaryKey]);
-            $parse->time_start = DateHelper::getDatetime6();
+            $parse->time_start = (new DateHelper)->getDatetime6();
             if(!$parse->save()){
                 \Yii::error("Error saving parse",__METHOD__);
                 var_dump($parse->errors);
-
+                return;
             }
 
             $items = $provider->findParsableItems($limit);
@@ -38,7 +38,7 @@ class ParseController extends Controller
                     $i++;
                 }
             }
-            $parse->time_end = DateHelper::getDatetime6();
+            $parse->time_end = (new DateHelper)->getDatetime6();
             $parse->items_parsed = $i;
             $parse->save();
 
@@ -50,6 +50,7 @@ class ParseController extends Controller
         $item = Item::findOne($id);
         if (empty($item)) {
             $this->stdout("Item $id not found ...\n", Console::BOLD, Console::FG_RED);
+            return;
         }
         $this->stdout("Parsing item $id ...\n");
         $parse = new Parse();

@@ -4,6 +4,7 @@ namespace app\models;
 
 use andmemasin\helpers\Replacer;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\db\Expression;
 
 /**
@@ -87,6 +88,8 @@ class Item extends \yii\db\ActiveRecord
             'title' => Yii::t('app', 'Title'),
         ];
     }
+
+
     /**
      * @inheritdoc
      */
@@ -169,22 +172,13 @@ class Item extends \yii\db\ActiveRecord
         return $this->hasOne(Provider::class, ['provider_id' => 'provider_id']);
     }
 
-    /**
-     * @param int $notThisId An ID that we want to eliminate from search 
-     * @return Listing
-     */
-    public function getLastListing($notThisId = null)
+    public function getLastListing() : ActiveQuery
     {
         $query = $this->getListings()
             ->orderBy(['listing_id'=>SORT_DESC])
             ->limit(1);
-        if($notThisId){
-            $query->andWhere([new Expression('!='),'listing_id',$notThisId]);
-        }
-        
-        /** @var Listing $model */
-        $model = $query->one();
-        return $model;
+        $query->multiple = false;
+        return $query;
     }
 
     /**

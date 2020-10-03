@@ -166,7 +166,7 @@ class Item extends \yii\db\ActiveRecord
 
     public function getLastListing() : ActiveQuery
     {
-        return $this->hasOne(Listing::class, ['item_id' => 'item_id', 'is_last' => 1]);
+        return $this->hasOne(Listing::class, ['item_id' => 'item_id'])->andWhere(['is_last' => 1]);
     }
 
     /**

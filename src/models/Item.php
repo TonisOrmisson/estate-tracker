@@ -166,11 +166,7 @@ class Item extends \yii\db\ActiveRecord
 
     public function getLastListing() : ActiveQuery
     {
-        $query = $this->getListings()
-            ->orderBy(['listing_id'=>SORT_DESC])
-            ->limit(1);
-        $query->multiple = false;
-        return $query;
+        return $this->hasOne(Listing::class, ['item_id' => 'item_id', 'is_last' => 1]);
     }
 
     /**

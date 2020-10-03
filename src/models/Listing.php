@@ -13,6 +13,7 @@ use yii\db\Expression;
  * @property integer $change
  * @property integer $is_success
  * @property integer $item_id
+ * @property integer $is_last
  * @property string $time_created
  * @property double $price
  * @property double $m2
@@ -38,7 +39,8 @@ class Listing extends \yii\db\ActiveRecord
     {
         return [
             [['item_id', 'time_created'], 'required'],
-            [['parse_id', 'item_id','change','is_success'], 'integer'],
+            [['parse_id', 'item_id','change','is_success', 'is_last'], 'integer'],
+            [[ 'is_last'], 'integer', 'max' => 1],
             [['time_created'], 'safe'],
             [['price','m2'], 'number'],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::class, 'targetAttribute' => ['item_id' => 'item_id']],

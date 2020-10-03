@@ -21,6 +21,7 @@ class ListingFactory
         $listing->item_id = $item->primaryKey;
         $listing->time_created = (new DateHelper)->getDatetime6();
         $listing->is_success = 0;
+        $listing->is_last = 1;
 
         // disable if not working
         if(!$item->isWorking){
@@ -32,8 +33,9 @@ class ListingFactory
             return;
         }
         $listing->save();
-        return $listing;
 
+        Listing::updateAll(['is_last' => 0], ['item_id' => $item->primaryKey, ['!=', 'listing_id', $listing->primaryKey]]);
+        return $listing;
     }
 
 }

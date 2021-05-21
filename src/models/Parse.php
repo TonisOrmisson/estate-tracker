@@ -162,14 +162,16 @@ class Parse extends \yii\db\ActiveRecord
      */
     private function parseNumber($initial) {
         $value = trim($initial);
+
         $value = str_replace(" ", "", $value);
+        $value = str_replace(" ", "", $value);
         $value = str_replace(' ', "", $value);
         $value = str_replace(",", ".", $value);
         preg_match('/([0-9]+\.?[0-9].)/', $value, $matches);
         if (empty($matches)) {
             return 0;
         }
-        $value = $matches[0];
+        $value = $matches[1];
         return floatval($value);
     }
 
